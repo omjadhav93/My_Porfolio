@@ -11,7 +11,7 @@ const sortingKeys = [
 ]
 
 // Sample data
-const blogList = [
+const blogListSample = [
   {
     Highlighted: true,
     Id: "b1a2c3d4",
@@ -138,6 +138,7 @@ const blogList = [
 
 export default function Blogs() {
   const [sortkeys, setsortkeys] = useState(sortingKeys);
+  const [blogList, setBlogList] = useState(blogListSample)
 
   const handleSorting = (key) => {
     let updatedKeys = sortkeys.map(item => {

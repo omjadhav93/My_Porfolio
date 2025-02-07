@@ -1,5 +1,9 @@
 import Image from "next/image";
 import { courier_prime } from "./font";
+import { faArrowRight, faArrowRightLong } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Link from "next/link";
+import Skills from "./Components/Skills";
 
 export default function Home() {
   return (
@@ -41,13 +45,13 @@ export default function Home() {
           <button type="button" className="outline-none border-none bg-slate-200 text-slate-900 font-semibold text-base px-4 py-2 rounded-lg hover:bg-slate-400 active:bg-slate-600">Contact Me</button>
         </div>
       </section>
-      <section className="about-me min-h-screen h-screen px-40 py-2">
+      <section id="Portfolio" className="about-me min-h-screen h-screen px-40 py-2">
         <div className="font-mono text-lg">.../About me...</div>
         <div className="flex flex-row w-full mt-2">
           <div className="flex flex-col gap-1 justify-center flex-grow pr-20 pl-4">
             <div className="text-2xl">Hello</div>
             <div className="text-3xl font-semibold">I'm Omkar Jadhav</div>
-            <div className="text-lg">Fullstack Developer with experience of more 1 year. Following are the technologies which I have learned and work on.</div>
+            <div className="text-lg">Fullstack Developer with experience of more than 1 year. Following are the technologies which I have learned and work on.</div>
             <div className="rounded-lg bg-slate-100 text-black py-4 px-4 mt-4">
               <p className="text-lg text-slate-600">Front-End</p>
               <p className="text-md font-mono">Javascript / React.js / Next.js / HTML / CSS / Bootstrap / Tailwind</p>
@@ -63,6 +67,20 @@ export default function Home() {
           </div>
         </div>
       </section>
+      <section className="bg-[#121212] min-h-screen h-screen px-40 py-14">
+        <div className="grid grid-cols-2 grid-rows-2 gap-1 p-1 border-2 rounded w-full h-full">
+          <div className="transition-all duration-300 col-[1/2] row-[1/2] border origin-top-left bg-green-800 hover:z-10 hover:scale-[2]"></div>
+          <div className="transition-all duration-300 col-[2/3] row-[1/2] border origin-top-right bg-red-800 hover:z-10 hover:scale-[2]"></div>
+          <div className="transition-all duration-300 col-[1/2] row-[2/3] border origin-bottom-left bg-yellow-600 hover:z-10 hover:scale-[2]"></div>
+          <div className="col-[2/3] row-[2/3] border flex flex-col justify-center items-center">
+            <p className="text-lg font-semibold text-sky-300">Explore</p>
+            <Link href={'/Projects'}>
+            <FontAwesomeIcon icon={faArrowRight} width={25} className="text-gray-300 cursor-pointer" />
+            </Link>
+          </div>
+        </div>
+      </section>
+      <Skills size={'min-h-screen h-screen px-40 py-2'} />
     </>
   );
 }
