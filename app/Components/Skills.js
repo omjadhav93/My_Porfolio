@@ -193,6 +193,10 @@ const skill_data = {
         "What can I do?": [
             "I can create simple applications using Python for automation.",
             "I can connect Python applications to databases like MySQL to perform data operations."
+        ],
+        "Additional Info": [
+            "I am familiar with Python's versatility in areas such as web development, automation, and data analysis.",
+            "I have a basic understanding of using Python to build and deploy RESTful APIs with Flask."
         ]
     },
 
@@ -259,7 +263,7 @@ const skill_list = [
 
 function SkillCard({ progress, title, onclick, hover = true, loc = null }) {
     return (
-        <div className={"flex justify-center items-center aspect-square m-2 p-5 rounded-md " + (hover ? " hover:bg-slate-400 hover:bg-opacity-50 " : " ")} style={loc && (loc <= 5 ? { gridColumn: `${loc}/${loc + 1}`, gridRow: '1/2' } : { gridColumn: `${loc - 5}/${loc - 4}`, gridRow: '2/3' })} onClick={onclick}>
+        <div className={"flex justify-center items-center aspect-square p-7 " + (hover ? " rounded-md hover:bg-slate-400 hover:bg-opacity-50 " : " bg-gray-900 bg-opacity-95")} style={loc && { gridColumn: `${loc.col} / span 1`, gridRow: `${loc.row} / span 1`, }} onClick={onclick}>
             <div className="relative rounded-full w-3/4 aspect-square p-[6%] shadow-xl">
                 <div className="rounded-full w-full aspect-square shadow-inner flex justify-center items-center">
                     <p className={"text-xl font-bold text-center " + courier_prime.className}>{title}</p>
@@ -271,7 +275,7 @@ function SkillCard({ progress, title, onclick, hover = true, loc = null }) {
                             <stop offset="100%" stopColor="#9733EE" />
                         </linearGradient>
                     </defs>
-                    <circle cx="50" cy="50" r="46" strokeLinecap="round" fill="none" strokeWidth="8" stroke="url(#GradientColor)" strokeDasharray={2 * Math.PI * 46} strokeDashoffset={2 * Math.PI * 46} style={{ "--end-offset": 2 * Math.PI * 46 * (1 - progress / 100) }} className="animate-[ProgressBar_1s_linear_forwards]" />
+                    <circle cx="50" cy="50" r="46" strokeLinecap="round" fill="none" strokeWidth="8" stroke="url(#GradientColor)" strokeDasharray={2 * Math.PI * 46} strokeDashoffset={2 * Math.PI * 46} style={{ "--end-offset": 2 * Math.PI * 46 * (1 - progress / 100) }} className={hover ? "animate-[ProgressBar_1s_linear_forwards]" : "animate-[ProgressBar_1s_linear_0.5s_forwards]"} />
                 </svg>
             </div>
         </div>
@@ -288,12 +292,7 @@ export default function Skills(props) {
         const skillBox = skillDetail.current;
         skillBox.style.transformOrigin = `${x_origin}% ${y_origin}%`;
         await sleep(500);
-        skillBox.classList.remove('scale-0')
-        skillBox.classList.add('scale-1')
-
         let data = skill_data[title];
-
-        await sleep(1000);
 
         setSkillItems((prevItems) => [
             ...prevItems,
@@ -305,6 +304,9 @@ export default function Skills(props) {
             data["Libraries"] ? { "Libraries": data["Libraries"] } : null,
             data["Additional Info"] ? { "Additional Info": data["Additional Info"] } : null
         ]);
+
+        skillBox.classList.remove('scale-0')
+        skillBox.classList.add('scale-1')
 
         const handleMouseOut = async () => {
             skillBox.classList.remove('scale-1')
@@ -330,23 +332,83 @@ export default function Skills(props) {
                 <SkillCard progress={45} title={'Python'} onclick={() => openSkillDetail(8, 50, 100, 45, 'Python')} />
                 <SkillCard progress={35} title={'MySQL'} onclick={() => openSkillDetail(9, 70, 100, 35, 'MySQL')} />
                 <SkillCard progress={65} title={'Git'} onclick={() => openSkillDetail(10, 100, 100, 65, 'Git')} />
-                <div ref={skillDetail} className="grid grid-cols-5 grid-rows-2 absolute w-full h-full top-0 left-0 z-10 bg-gray-900 bg-opacity-95 rounded-lg transition-all duration-1000 scale-0">
-                    {skillItems.map((item, index) => {
-                        if (item && item.card) {
-                            return <SkillCard key={index} progress={item.progress} title={item.title} onclick={() => { }} hover={false} loc={item.grid_loc} />
-                        } else if (item) {
+                <div ref={skillDetail} className="grid grid-cols-5 grid-rows-2 absolute w-full h-full top-0 left-0 z-10 transition-all duration-1000 scale-0">
+                    {(() => {
+                        const neighbors = new Set();
+                        const GRID_COLS = 5; // Number of columns in the grid
+                        const GRID_ROWS = 2; // Number of rows in the grid
+
+                        const getNeighbors = (row, col) => {
+                            let neighborCells = [];
+                            const dirMidCells = [
+                                [-1, 0], // Up
+                                [1, 0], // Down
+                                [0, -1], // Left
+                                [0, 1], // Right
+                                [-1, -1], // Top-left diagonal
+                                [-1, 1], // Top-right diagonal
+                                [1, -1], // Bottom-left diagonal
+                                [1, 1], // Bottom-right diagonal
+                                // Only five directions will be valid here.
+                            ];
+                            const dirCornerCells = [
+                                [0, -2], // Double Left
+                                [0, 2], // Double Right
+                                [-1, -2], // Top-double-left diagonal
+                                [-1, 2], // Top-double-right diagonal
+                                [1, -2], // Bottom-double-left diagonal
+                                [1, 2], // Bottom-double-right diagonal 
+                                // Only two cells will be valid here for corners.
+                            ]
+
+                            for (const [dRow, dCol] of dirMidCells) {
+                                const nRow = row + dRow;
+                                const nCol = col + dCol;
+                                if (nRow > 0 && nRow <= GRID_ROWS && nCol > 0 && nCol <= GRID_COLS) {
+                                    neighborCells.push(`${nRow}-${nCol}`);
+                                }
+                            }
+
+                            if (col === 1 || col === 5) {
+                                for (const [dRow, dCol] of dirCornerCells) {
+                                    const nRow = row + dRow;
+                                    const nCol = col + dCol;
+                                    if (nRow > 0 && nRow <= GRID_ROWS && nCol > 0 && nCol <= GRID_COLS) {
+                                        neighborCells.push(`${nRow}-${nCol}`);
+                                    }
+                                }
+                            }
+
+                            return neighborCells;
+                        }
+
+                        const skillCard = skillItems.filter(item => item && item.card).map((item, index) => {
+                            const col = item.grid_loc <= GRID_COLS ? item.grid_loc : item.grid_loc - GRID_COLS;
+                            const row = item.grid_loc <= GRID_COLS ? 1 : 2;
+                            const neighborCells = getNeighbors(row, col);
+                            neighborCells.forEach((neighbor) => neighbors.add(neighbor));
+
+                            return <SkillCard key={index - 1} progress={item.progress} title={item.title} onclick={() => { }} hover={false} loc={{ row, col }} />
+                        })
+
+                        const otherCells = skillItems.filter(item => item && !item.card).map((item, index) => {
+                            let Cell = Array.from(neighbors)[index]; // Place in already calculated neighbor cells
+                            const [row, col] = Cell.split("-").map(Number);
+
                             return (
-                                <div key={index} className="flex flex-col gap-2 px-3 py-2">
+                                <div key={index} className="flex flex-col gap-1 bg-gray-900 px-3 py-2" style={{ gridColumn: `${col} / span 1`, gridRow: `${row} / span 1` }}>
                                     <h3 className="text-base font-semibold text-green-400">{Object.keys(item)[0]}</h3>
-                                    <ul className="flex flex-col gap-[1px] list-disc list-inside">
+                                    <ul className="flex flex-col gap-2 list-disc list-inside">
                                         {Object.values(item)[0].map((value, i) => {
                                             return <li key={i} className="text-xs font-medium text-amber-400">{value}</li>
                                         })}
                                     </ul>
                                 </div>
                             )
-                        }
-                    })}
+                        })
+
+                        return [...skillCard, ...otherCells];
+                    })()}
                 </div>
             </div>
         </section >

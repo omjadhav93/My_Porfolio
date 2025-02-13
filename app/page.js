@@ -60,7 +60,7 @@ export default function Home() {
               <p className="text-lg text-slate-400">Back-End</p>
               <p className="text-md  font-mono">Node.js / Next.js / Express.js / Mongodb / MySql</p>
             </div>
-            <button type="button" className="outline-none border-none w-max bg-green-700 text-zinc-50 font-semibold text-base px-4 py-2 mt-8 rounded-lg hover:bg-green-600 active:bg-blue-500">Download Resume</button>
+            <a href="/Omkar_Resume.pdf" download="Omkar_Resume" className="outline-none border-none w-max bg-green-700 text-zinc-50 font-semibold text-base px-4 py-2 mt-8 rounded-lg hover:bg-green-600 active:bg-blue-500">Download Resume</a>
           </div>
           <div className="w-1/2 flex flex-row justify-center">
             <Image src={'/My_Pic.jpg'} className="rounded-xl" width={400} height={650} alt="My pic"></Image>
@@ -72,14 +72,14 @@ export default function Home() {
           <div className="transition-all duration-300 col-[1/2] row-[1/2] border origin-top-left bg-green-800 hover:z-10 hover:scale-[2]"></div>
           <div className="transition-all duration-300 col-[2/3] row-[1/2] border origin-top-right bg-red-800 hover:z-10 hover:scale-[2]"></div>
           <div className="transition-all duration-300 col-[1/2] row-[2/3] border origin-bottom-left bg-yellow-600 hover:z-10 hover:scale-[2]"></div>
-          <div className="col-[2/3] row-[2/3] border flex flex-col justify-center items-center">
-            <p className="text-lg font-semibold text-sky-300">Explore</p>
-            <Link href={'/Projects'}>
-            <FontAwesomeIcon icon={faArrowRight} width={25} className="text-gray-300 cursor-pointer" />
+          <div className="col-[2/3] row-[2/3] border hover:bg-slate-200 hover:bg-opacity-20">
+            <Link href={'/Projects'} className="w-full h-full flex flex-col justify-center items-center cursor-pointer">
+              <p className="text-lg font-semibold text-sky-300">Explore</p>
+              <FontAwesomeIcon icon={faArrowRight} width={25} className="text-gray-300" />
             </Link>
           </div>
         </div>
-      </section>
+      </section >
       <Skills size={'min-h-screen h-screen px-40 py-2'} />
     </>
   );

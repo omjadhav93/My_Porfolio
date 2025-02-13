@@ -1,4 +1,4 @@
-import { Poppins, Courier_Prime, Rubik_Gemstones } from 'next/font/google'
+import { Poppins, Courier_Prime, Rubik_Gemstones, Noto_Serif } from 'next/font/google'
 
 export const poppins = Poppins({
     weight: ['200', '300', '400', '500','600'],
@@ -14,6 +14,12 @@ export const courier_prime = Courier_Prime({
 
 export const rubik_gemstones_regular = Rubik_Gemstones({
     weight: ['400'],
+    subsets: ['latin'],
+    display: 'auto'
+})
+
+export const noto_serif = Noto_Serif({
+    weight: ['200', '300', '400', '500','600'],
     subsets: ['latin'],
     display: 'auto'
 })
