@@ -153,40 +153,48 @@ export default function Blogs() {
         <h4 className='text-lg font-mono w-full'>.../Top Highlight ...</h4>
         <div className="flex flex-row justify-center w-full">
           <div className='flex justify-end w-1/2 p-4 pt-0'>
-            {blogList.filter(item => item.Highlighted).map((item, index) => {
-              return index === 0 ? <div key={item.Id} className='border-none rounded-lg overflow-hidden bg-slate-800 mt-8 w-3/4'>
-                <Image src={item.Image} alt="Image" width={0} height={0} sizes="100vw" style={{ width: "100%", maxWidth: '100%', height: 'auto', maxHeight: "250px", objectFit: "cover" }}></Image>
-                <div className="flex flex-col gap-2 px-4 py-3">
-                  <div className="flex flex-row gap-1 flex-wrap">
-                    {item.Tags.map((tag, i) => <div key={i} className="rounded-2xl bg-slate-200 text-gray-600 px-3 py-1 text-sm font-medium">{tag}</div>
-                    )}
+            {blogList
+              .filter(item => item.Highlighted)
+              .map((item, index) => (
+                index === 0 ? (
+                  <div key={item.Id} className='border-none rounded-lg overflow-hidden bg-slate-800 mt-8 w-3/4'>
+                    <Image src={item.Image} alt="Image" width={0} height={0} sizes="100vw" style={{ width: "100%", maxWidth: '100%', height: 'auto', maxHeight: "250px", objectFit: "cover" }}></Image>
+                    <div className="flex flex-col gap-2 px-4 py-3">
+                      <div className="flex flex-row gap-1 flex-wrap">
+                        {item.Tags.map((tag, i) => <div key={i} className="rounded-2xl bg-slate-200 text-gray-600 px-3 py-1 text-sm font-medium">{tag}</div>
+                        )}
+                      </div>
+                      <div className="flex flex-col gap-1">
+                        <p className="text-base font-semibold text-blue-400 mt-1">{item.Title}</p>
+                        <p className="text-sm font-normal">{item.Description}</p>
+                        <p className="text-xs font-medium text-gray-600">{item.Blog_Age}</p>
+                      </div>
+                    </div>
                   </div>
-                  <div className="flex flex-col gap-1">
-                    <p className="text-base font-semibold text-blue-400 mt-1">{item.Title}</p>
-                    <p className="text-sm font-normal">{item.Description}</p>
-                    <p className="text-xs font-medium text-gray-600">{item.Blog_Age}</p>
-                  </div>
-                </div>
-              </div> : <></>
-            })}
+                ) : null
+              ))}
           </div>
           <div className='flex justify-start w-1/2 p-4 pt-0'>
-            {blogList.filter(item => item.Highlighted).map((item, index) => {
-              return index === 1 ? <div key={item.Id} className='border-none rounded-lg overflow-hidden bg-slate-800 mt-8 w-3/4'>
-                <Image src={item.Image} alt="Image" width={0} height={0} sizes="100vw" style={{ width: "100%", maxWidth: '100%', height: 'auto', maxHeight: "250px", objectFit: "cover" }}></Image>
-                <div className="flex flex-col gap-2 px-4 py-3">
-                  <div className="flex flex-row gap-1 flex-wrap">
-                    {item.Tags.map((tag, i) => <div key={i} className="rounded-2xl bg-slate-200 text-gray-600 px-3 py-1 text-sm font-medium">{tag}</div>
-                    )}
+            {blogList
+              .filter(item => item.Highlighted)
+              .map((item, index) => (
+                index === 1 ? (
+                  <div key={item.Id} className='border-none rounded-lg overflow-hidden bg-slate-800 mt-8 w-3/4'>
+                    <Image src={item.Image} alt="Image" width={0} height={0} sizes="100vw" style={{ width: "100%", maxWidth: '100%', height: 'auto', maxHeight: "250px", objectFit: "cover" }}></Image>
+                    <div className="flex flex-col gap-2 px-4 py-3">
+                      <div className="flex flex-row gap-1 flex-wrap">
+                        {item.Tags.map((tag, i) => <div key={i} className="rounded-2xl bg-slate-200 text-gray-600 px-3 py-1 text-sm font-medium">{tag}</div>
+                        )}
+                      </div>
+                      <div className="flex flex-col gap-1">
+                        <p className="text-base font-semibold text-blue-400 mt-1">{item.Title}</p>
+                        <p className="text-sm font-normal">{item.Description}</p>
+                        <p className="text-xs font-medium text-gray-600">{item.Blog_Age}</p>
+                      </div>
+                    </div>
                   </div>
-                  <div className="flex flex-col gap-1">
-                    <p className="text-base font-semibold text-blue-400 mt-1">{item.Title}</p>
-                    <p className="text-sm font-normal">{item.Description}</p>
-                    <p className="text-xs font-medium text-gray-600">{item.Blog_Age}</p>
-                  </div>
-                </div>
-              </div> : <></>
-            })}
+                ) : null
+              ))}
           </div>
         </div>
       </section>
@@ -201,7 +209,7 @@ export default function Blogs() {
         </div>
         <div className="flex flex-row flex-wrap gap-x-4 gap-y-14 justify-evenly mt-6">
           {blogList.filter(item => !item.Highlighted).map(item =>
-            <div className="w-80 min-h-[400px] border-none rounded-lg overflow-hidden bg-slate-800">
+            <div key={item.Id} className="w-80 min-h-[400px] border-none rounded-lg overflow-hidden bg-slate-800">
               <Image src={item.Image} alt="Image" width={0} height={0} sizes="100vw" style={{ width: "100%", maxWidth: '100%', height: 'auto', maxHeight: "250px", objectFit: "cover" }}></Image>
               <div className="flex flex-col gap-2 px-4 py-3">
                 <div className="flex flex-row gap-1 flex-wrap">

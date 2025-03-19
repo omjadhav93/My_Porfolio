@@ -2,6 +2,7 @@ import Image from "next/image"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCalendarDays, faCode, faEnvelope, faGraduationCap, faLocationDot, faPhone, faSchool } from '@fortawesome/free-solid-svg-icons'
 import Skills from "../Components/Skills"
+import Achievements from "../Components/Achievements"
 
 export default function About() {
   return (
@@ -58,6 +59,7 @@ export default function About() {
         </div>
       </section>
       <Skills size="w-3/4" />
+      <Achievements />
     </>
   )
 }

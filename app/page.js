@@ -4,6 +4,7 @@ import { faArrowRight, faArrowRightLong } from "@fortawesome/free-solid-svg-icon
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 import Skills from "./Components/Skills";
+import Achievements from "./Components/Achievements";
 
 export default function Home() {
   return (
@@ -80,7 +81,8 @@ export default function Home() {
           </div>
         </div>
       </section >
-      <Skills size={'min-h-screen h-screen px-40 py-2'} />
+      <Skills size={' px-40 py-2'} />
+      <Achievements />
     </>
   );
 }
