@@ -1,3 +1,6 @@
+import fs from 'fs';
+import path from 'path';
+
 export async function GET(req) {
     const { searchParams } = new URL(req.url);
     const project = searchParams.get('project');
@@ -10,17 +13,16 @@ export async function GET(req) {
     }
 
     try {
-        // Build the full URL using the request host
-        const host = req.headers.get('host');
-        const protocol = req.headers.get('x-forwarded-proto') || 'http'; // Handles https in production
-        const htmlUrl = `${protocol}://${host}/public/HtmlContent/${project}.html`;
+        // Move HTML files to the 'content' folder
+        const filePath = path.join(process.cwd(), `content/${project}.html`);
 
-        const htmlContent = await fetch(htmlUrl);
-        if (!htmlContent.ok) throw new Error('File not found');
+        if (!fs.existsSync(filePath)) {
+            throw new Error('File not found');
+        }
 
-        const content = await htmlContent.text();
+        const htmlContent = fs.readFileSync(filePath, 'utf-8');
 
-        return new Response(content, {
+        return new Response(htmlContent, {
             status: 200,
             headers: { 'Content-Type': 'text/html' },
         });
