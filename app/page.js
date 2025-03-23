@@ -81,8 +81,39 @@ export default function Home() {
           </div>
         </div>
       </section >
-      <Skills size={' px-40 py-2'} />
+      <Skills size={' px-40 py-2 '} />
       <Achievements />
+      <section className="bg-[#121212] px-40 py-20">
+        <div className="font-mono text-lg">.../Client Testimonial....</div>
+        <div
+                className="mt-12 bg-gradient-to-br from-gray-900 to-gray-800 p-8 rounded-xl shadow-lg mx-auto max-w-4xl border border-gray-800">
+                <div className="mb-6">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+                        className="text-teal-400 mx-auto">
+                        <path
+                            d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z">
+                        </path>
+                        <path
+                            d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z">
+                        </path>
+                    </svg>
+                </div>
+                <p className="text-gray-300 text-lg italic mb-6">The e-commerce platform developed has transformed our
+                    business operations completely. The intuitive interface has increased customer engagement, and the
+                    robust backend has streamlined our inventory management. A truly professional solution that exceeded
+                    our expectations.</p>
+                <div className="flex items-center justify-center">
+                    <div className="w-12 h-12 rounded-full bg-gray-700 overflow-hidden mr-4">
+                        <Image src="/AJWS/client_avatar.jpg" alt="Client" width={0} height={0} className="w-full h-full object-cover"></Image>
+                    </div>
+                    <div className="text-left">
+                        <h4 className="text-white font-semibold">Anil Jadhav</h4>
+                        <p className="text-gray-400">Founder & CEO, AJ Water Solutions</p>
+                    </div>
+                </div>
+            </div>
+        </section>
     </>
   );
 }

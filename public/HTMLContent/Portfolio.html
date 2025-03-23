@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-slate-950 text-gray-200 leading-relaxed font-['Inter']">
+    <div class="max-w-7xl mx-auto px-8 py-8">
+        <div class="text-center mb-12 relative">
+            <button
+                class="absolute top-0 left-0 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition duration-200 shadow-lg"
+                onclick="window.history.back();">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-arrow-left text-gray-300" viewBox="0 0 16 16">
+                    <path stroke="currentColor" stroke-width="1.5" fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
+                </svg>
+            </button>
+            <h1 class="text-4xl text-white mb-4 md:text-5xl font-bold">Personal Portfolio Website</h1>
+            <p class="text-lg text-gray-400 max-w-3xl mx-auto">A modern, responsive portfolio website built with Next.js and Tailwind CSS to showcase my professional journey and projects as a Full-Stack Developer.</p>
+        </div>
+
+        <div class="bg-gradient-to-br from-slate-900 to-slate-800 p-8 rounded-xl shadow-lg mb-8 border border-slate-800">
+            <h2 class="text-2xl text-white mb-4 font-semibold">Project Overview</h2>
+            <p class="mb-6">As a Full-Stack Developer, I created a comprehensive portfolio website that effectively showcases my skills, projects, and professional journey. The platform features a modern design, smooth transitions, and optimal performance across all devices.</p>
+
+            <h3 class="text-xl text-white mb-4">Technology Stack</h3>
+            <div class="flex flex-wrap gap-6 mb-6">
+                <span
+                    class="bg-slate-800 text-white px-4 py-2 rounded-xl flex items-center gap-3 hover:transform hover:-translate-y-1 transition-transform duration-200 shadow-md">
+                    <img src="/Next.js.svg" alt="Next.js" class="w-6 h-6">
+                    Next.js
+                </span>
+                <span
+                    class="bg-slate-800 text-white px-4 py-2 rounded-xl flex items-center gap-3 hover:transform hover:-translate-y-1 transition-transform duration-200 shadow-md">
+                    <img src="/TailwindCSS.svg" alt="Tailwind CSS" class="w-6 h-6">
+                    Tailwind CSS
+                </span>
+                <span
+                    class="bg-slate-800 text-white px-4 py-2 rounded-xl flex items-center gap-3 hover:transform hover:-translate-y-1 transition-transform duration-200 shadow-md">
+                    <img src="/JavaScript.svg" alt="JavaScript" class="w-6 h-6">
+                    JavaScript
+                </span>
+                <span
+                    class="bg-slate-800 text-white px-4 py-2 rounded-xl flex items-center gap-3 hover:transform hover:-translate-y-1 transition-transform duration-200 shadow-md">
+                    <img src="/React.svg" alt="React" class="w-6 h-6">
+                    React
+                </span>
+            </div>
+            <div class="preview-section">
+                <h3 class="text-xl text-white mb-2">Live Preview</h3>
+                <div
+                    class="flex flex-col items-center bg-slate-900 rounded-xl p-6 my-4 border border-indigo-800/30 hover:border-indigo-600/50 transition-all duration-300">
+                    <div class="text-indigo-400 mb-3 flex items-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16" class="text-green-400">
+                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+                        </svg>
+                        <span class="text-lg font-medium">You're currently browsing this portfolio</span>
+                    </div>
+                    <a href="https://github.com/omjadhav93/My_Porfolio" target="_blank" rel="noopener noreferrer"
+                        class="group flex items-center gap-2 text-indigo-400 hover:text-indigo-300 transition-all duration-300 text-lg font-medium">
+                        <span>View Source Code</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                            class="transform group-hover:translate-x-1 transition-transform duration-300"
+                            viewBox="0 0 16 16">
+                            <path fill-rule="evenodd"
+                                d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z" />
+                            <path fill-rule="evenodd"
+                                d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z" />
+                        </svg>
+                    </a>
+                    <p class="text-gray-400 text-center mt-3">This portfolio features smooth transitions, responsive design, and interactive elements built with Next.js and Tailwind CSS.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="my-12">
+            <h2 class="text-3xl text-white mb-8 text-center font-semibold">Key Features</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div
+                    class="bg-gradient-to-br from-slate-900 to-slate-800 p-6 rounded-2xl shadow-lg hover:transform hover:-translate-y-2 transition-transform duration-300 border border-slate-800">
+                    <div class="h-52 bg-slate-700 rounded-xl mb-6 flex items-center justify-center overflow-hidden">
+                        <img src="/Portfolio/Portfolio_Homepage.png" alt="Portfolio Page" class="w-full h-full object-contain">
+                    </div>
+                    <h3 class="text-xl text-white mb-3 font-semibold">Portfolio Page</h3>
+                    <p class="text-gray-400 leading-relaxed">Dynamic showcase of core skills and experiences with interactive hover effects and smooth transitions.</p>
+                </div>
+
+                <div
+                    class="bg-gradient-to-br from-slate-900 to-slate-800 p-6 rounded-2xl shadow-lg hover:transform hover:-translate-y-2 transition-transform duration-300 border border-slate-800">
+                    <div class="h-52 bg-slate-700 rounded-xl mb-6 flex items-center justify-center overflow-hidden">
+                        <img src="/Portfolio/Portfolio_Projectspage.png" alt="Projects Page" class="w-full h-full object-contain">
+                    </div>
+                    <h3 class="text-xl text-white mb-3 font-semibold">Projects Page</h3>
+                    <p class="text-gray-400 leading-relaxed">Comprehensive showcase of projects with detailed descriptions, live previews, and technical details.</p>
+                </div>
+
+                <div
+                    class="bg-gradient-to-br from-slate-900 to-slate-800 p-6 rounded-2xl shadow-lg hover:transform hover:-translate-y-2 transition-transform duration-300 border border-slate-800">
+                    <div class="h-52 bg-slate-700 rounded-xl mb-6 flex items-center justify-center overflow-hidden">
+                        <img src="/Portfolio/Portfolio_Blogpage.png" alt="Blogs Page" class="w-full h-full object-contain">
+                    </div>
+                    <h3 class="text-xl text-white mb-3 font-semibold">Blogs Page</h3>
+                    <p class="text-gray-400 leading-relaxed">Clean and structured presentation of blog posts using HTML-based text rendering.</p>
+                </div>
+
+                <div
+                    class="bg-gradient-to-br from-slate-900 to-slate-800 p-6 rounded-2xl shadow-lg hover:transform hover:-translate-y-2 transition-transform duration-300 border border-slate-800">
+                    <div class="h-52 bg-slate-700 rounded-xl mb-6 flex items-center justify-center overflow-hidden">
+                        <img src="/Portfolio/Portfolio_Aboutpage.png" alt="About Page" class="w-full h-full object-contain">
+                    </div>
+                    <h3 class="text-xl text-white mb-3 font-semibold">About Page</h3>
+                    <p class="text-gray-400 leading-relaxed">Professional overview of background, skills, and career journey with engaging visuals.</p>
+                </div>
+
+                <div
+                    class="bg-gradient-to-br from-slate-900 to-slate-800 p-6 rounded-2xl shadow-lg hover:transform hover:-translate-y-2 transition-transform duration-300 border border-slate-800">
+                    <div class="h-52 bg-slate-700 rounded-xl mb-6 flex items-center justify-center overflow-hidden">
+                        <img src="/Portfolio/Portfolio_Contactpage.png" alt="Contact Page" class="w-full h-full object-contain">
+                    </div>
+                    <h3 class="text-xl text-white mb-3 font-semibold">Contact Page</h3>
+                    <p class="text-gray-400 leading-relaxed">Interactive contact form with validation and direct communication capabilities.</p>
+                </div>
+
+                <div
+                    class="bg-gradient-to-br from-slate-900 to-slate-800 p-6 rounded-2xl shadow-lg hover:transform hover:-translate-y-2 transition-transform duration-300 border border-slate-800">
+                    <div class="h-52 bg-slate-700 rounded-xl mb-6 flex items-center justify-center overflow-hidden">
+                        <img src="/Portfolio/Responsive_Design.jpg" alt="Responsive Design" class="w-full h-full object-contain">
+                    </div>
+                    <h3 class="text-xl text-white mb-3 font-semibold">Responsive Design</h3>
+                    <p class="text-gray-400 leading-relaxed">Seamless experience across all devices with optimized layouts and interactions.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-gradient-to-br from-slate-900 to-slate-800 p-8 rounded-xl shadow-lg my-12 border border-slate-800">
+            <h2 class="text-2xl text-white mb-6 font-semibold">Technical Implementation</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-slate-800 p-6 rounded-lg hover:bg-slate-700 transition-all duration-300">
+                    <h3 class="text-indigo-400 mb-3 font-semibold">Next.js Integration</h3>
+                    <p class="text-gray-300">Leveraged Next.js for server-side rendering, routing, and optimal performance with automatic code splitting.</p>
+                </div>
+                <div class="bg-slate-800 p-6 rounded-lg hover:bg-slate-700 transition-all duration-300">
+                    <h3 class="text-indigo-400 mb-3 font-semibold">Tailwind Styling</h3>
+                    <p class="text-gray-300">Utilized Tailwind CSS for consistent styling, responsive design, and utility-first approach to UI development.</p>
+                </div>
+                <div class="bg-slate-800 p-6 rounded-lg hover:bg-slate-700 transition-all duration-300">
+                    <h3 class="text-indigo-400 mb-3 font-semibold">Performance Optimization</h3>
+                    <p class="text-gray-300">Implemented image optimization, lazy loading, and efficient bundle management for fast load times.</p>
+                </div>
+                <div class="bg-slate-800 p-6 rounded-lg hover:bg-slate-700 transition-all duration-300">
+                    <h3 class="text-indigo-400 mb-3 font-semibold">Animations & Transitions</h3>
+                    <p class="text-gray-300">Added smooth page transitions and interactive animations using Framer Motion and CSS transitions.</p>
+                </div>
+                <div class="bg-slate-800 p-6 rounded-lg hover:bg-slate-700 transition-all duration-300">
+                    <h3 class="text-indigo-400 mb-3 font-semibold">SEO Optimization</h3>
+                    <p class="text-gray-300">Implemented meta tags, structured data, and semantic HTML for improved search engine visibility.</p>
+                </div>
+                <div class="bg-slate-800 p-6 rounded-lg hover:bg-slate-700 transition-all duration-300">
+                    <h3 class="text-indigo-400 mb-3 font-semibold">Accessibility</h3>
+                    <p class="text-gray-300">Ensured WCAG compliance with proper ARIA labels, keyboard navigation, and screen reader support.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="my-12">
+            <h2 class="text-3xl text-white mb-8 text-center font-semibold">Performance Metrics</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                <div
+                    class="bg-gradient-to-br from-slate-900 to-slate-800 p-8 rounded-xl shadow-lg hover:transform hover:-translate-y-2 transition-transform duration-300 border border-slate-800">
+                    <h3 class="text-2xl text-white mb-6 font-semibold">Lighthouse Scores</h3>
+                    <div class="bg-slate-800 p-6 rounded-xl mb-6 overflow-hidden">
+                        <img src="/Portfolio/lighthouse_scores.jpg" alt="Lighthouse Scores" class="w-full h-auto rounded-lg">
+                    </div>
+                    <p class="text-gray-400 leading-relaxed">Achieved excellent performance scores across all Lighthouse metrics, ensuring optimal user experience.</p>
+                </div>
+
+                <div
+                    class="bg-gradient-to-br from-slate-900 to-slate-800 p-8 rounded-xl shadow-lg hover:transform hover:-translate-y-2 transition-transform duration-300 border border-slate-800">
+                    <h3 class="text-2xl text-white mb-6 font-semibold">Load Time Analysis</h3>
+                    <div class="bg-slate-800 p-6 rounded-xl mb-6 overflow-hidden">
+                        <img src="/Portfolio/load_time.jpg" alt="Load Time Analysis" class="w-full h-auto rounded-lg">
+                    </div>
+                    <p class="text-gray-400 leading-relaxed">Optimized load times with efficient resource loading and caching strategies.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-gradient-to-br from-slate-900 to-slate-800 p-8 rounded-xl shadow-lg my-12 border border-slate-800">
+            <h2 class="text-2xl text-white mb-6 font-semibold">Technical Achievements</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                <div class="bg-slate-800 p-6 rounded-lg hover:bg-opacity-80 transition-all duration-300">
+                    <div class="text-4xl text-indigo-400 mb-3">98%</div>
+                    <h3 class="text-white mb-2 font-semibold">Performance Score</h3>
+                    <p class="text-gray-400">Optimized for speed with efficient code and asset management.</p>
+                </div>
+                <div class="bg-slate-800 p-6 rounded-lg hover:bg-opacity-80 transition-all duration-300">
+                    <div class="text-4xl text-indigo-400 mb-3">100%</div>
+                    <h3 class="text-white mb-2 font-semibold">Accessibility</h3>
+                    <p class="text-gray-400">Full compliance with WCAG 2.1 guidelines for inclusive design.</p>
+                </div>
+                <div class="bg-slate-800 p-6 rounded-lg hover:bg-opacity-80 transition-all duration-300">
+                    <div class="text-4xl text-indigo-400 mb-3">95%</div>
+                    <h3 class="text-white mb-2 font-semibold">SEO Score</h3>
+                    <p class="text-gray-400">Optimized for search engines with proper meta tags and structure.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
