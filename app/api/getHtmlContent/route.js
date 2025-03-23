@@ -14,7 +14,7 @@ export async function GET(req) {
 
     try {
         // Move HTML files to the 'content' folder
-        const filePath = path.join(process.cwd(), `content/${project}.html`);
+        const filePath = path.join(process.cwd(), `HTMLContent/${project}.html`);
 
         if (!fs.existsSync(filePath)) {
             throw new Error('File not found');
