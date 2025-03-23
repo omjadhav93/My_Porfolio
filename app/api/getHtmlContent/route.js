@@ -13,7 +13,7 @@ export async function GET(req) {
         // Build the full URL using the request host
         const host = req.headers.get('host');
         const protocol = req.headers.get('x-forwarded-proto') || 'http'; // Handles https in production
-        const htmlUrl = `${protocol}://${host}/HtmlContent/${project}.html`;
+        const htmlUrl = `${protocol}://${host}/public/HtmlContent/${project}.html`;
 
         const htmlContent = await fetch(htmlUrl);
         if (!htmlContent.ok) throw new Error('File not found');
