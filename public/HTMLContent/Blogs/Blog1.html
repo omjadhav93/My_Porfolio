@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Learn how to deploy a Node.js full-stack application on a Linux VM using NGINX as a reverse proxy and PM2 for process management">
+    <title>Deploying a Node.js Full-Stack App on a Linux VM Using NGINX and PM2</title>
+    <style>
+        :root {
+            --primary-color: #60a5fa;
+            --secondary-color: #3b82f6;
+            --accent-color: #38bdf8;
+            --text-color: #e2e8f0;
+            --light-text: #94a3b8;
+            --bg-color: #1e293b;
+            --card-bg: #0f172a;
+            --code-bg: #1e293b;
+            --border-color: #334155;
+            --success-color: #4ade80;
+            --tip-bg: #172554;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: #0f172a;
+            padding:50px 0 ;
+            margin: 0;
+        }
+
+        .blog-container {
+            max-width: 850px;
+            margin: 0 auto;
+            background-color: var(--card-bg);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .blog-header {
+            background: linear-gradient(135deg, #1e40af, #0d2770);
+            color: white;
+            padding: 2.5rem 2rem;
+            text-align: center;
+        }
+
+        .blog-header h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            line-height: 1.3;
+            color: #ffffff;
+        }
+
+        .blog-meta {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-top: 1rem;
+        }
+
+        .blog-post {
+            padding: 2rem;
+        }
+
+        section {
+            margin-bottom: 3rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        section:last-child {
+            border-bottom: none;
+        }
+
+        h2 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin: 1.5rem 0 1rem 0;
+            padding-bottom: 0.5rem;
+            position: relative;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background-color: var(--accent-color);
+            border-radius: 3px;
+        }
+
+        h3 {
+            font-size: 1.35rem;
+            font-weight: 600;
+            margin: 1.5rem 0 1rem 0;
+            color: var(--secondary-color);
+        }
+
+        p {
+            margin-bottom: 1.2rem;
+            font-size: 1.05rem;
+            color: var(--text-color);
+        }
+
+        ul, ol {
+            margin: 1rem 0 1.5rem 1.5rem;
+            color: var(--text-color);
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        strong {
+            font-weight: 600;
+            color: var(--accent-color);
+        }
+
+        pre {
+            background-color: var(--bg-color);
+            border-radius: 6px;
+            padding: 1rem;
+            margin: 1.2rem 0;
+            overflow-x: auto;
+            border: 1px solid var(--border-color);
+        }
+
+        code {
+            font-family: 'Fira Code', 'Consolas', 'Monaco', 'Andale Mono', monospace;
+            font-size: 0.9rem;
+            color: #a5f3fc;
+        }
+
+        .section-tip {
+            background-color: var(--tip-bg);
+            border-left: 4px solid var(--accent-color);
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 0 6px 6px 0;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            background-color: #111827;
+            color: var(--light-text);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .blog-container {
+                max-width: 100%;
+                border-radius: 0;
+                box-shadow: none;
+            }
+            
+            .blog-header {
+                padding: 2rem 1rem;
+            }
+            
+            .blog-header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .blog-post {
+                padding: 1.5rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+            
+            h3 {
+                font-size: 1.25rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="blog-container">
+        <header class="blog-header">
+            <h1>Deploying a Node.js Full-Stack App on a Linux VM Using NGINX and PM2</h1>
+            <div class="blog-meta">Published on <time datetime="2023-08-15">August 15, 2023</time> • 15 min read</div>
+        </header>
+        
+        <article class="blog-post">
+            <section id="introduction">
+                <h2>Introduction</h2>
+                <p>Deploying Node.js applications on Linux Virtual Machines provides significant advantages in terms of scalability, performance, and control over your infrastructure. When properly configured, a Linux VM offers the flexibility needed for production environments while maintaining cost-effectiveness.</p>
+                
+                <p>In this comprehensive guide, we'll explore how to deploy a full-stack Node.js application using two essential tools:</p>
+                
+                <ul>
+                    <li><strong>NGINX</strong>: A high-performance web server that acts as a reverse proxy, efficiently handling client requests and directing them to your Node.js application.</li>
+                    <li><strong>PM2</strong>: A process manager for Node.js applications that ensures your app remains running, automatically restarts after crashes, and optimizes performance across CPU cores.</li>
+                </ul>
+                
+                <p>This deployment strategy creates a robust architecture that can handle high traffic loads while maintaining reliability and security—essential qualities for any production application.</p>
+            </section>
+            
+            <section id="prerequisites">
+                <h2>Prerequisites</h2>
+                <p>Before we begin, ensure you have the following:</p>
+                
+                <ul>
+                    <li>A Linux-based Virtual Machine with SSH access (Ubuntu 20.04 LTS or later recommended)</li>
+                    <li>Root or sudo privileges on the VM</li>
+                    <li>Basic familiarity with Linux command line operations</li>
+                    <li>A domain name pointing to your server's IP address (for HTTPS setup)</li>
+                    <li>Your Node.js application code (preferably in a Git repository)</li>
+                </ul>
+                
+                <div class="section-tip">
+                    <strong>Pro Tip:</strong> If you're new to Linux VMs, consider using DigitalOcean, AWS Lightsail, or Linode for affordable and beginner-friendly options.
+                </div>
+            </section>
+            
+            <section id="step1">
+                <h2>Step 1: Installing Node.js and NPM</h2>
+                
+                <p>First, connect to your VM via SSH:</p>
+                
+                <pre><code>ssh username@your_server_ip</code></pre>
+                
+                <p>Update and upgrade your system packages:</p>
+                
+                <pre><code>sudo apt update
+sudo apt upgrade -y</code></pre>
+                
+                <p>Install Node Version Manager (NVM) for better Node.js version management:</p>
+                
+                <pre><code>curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash</code></pre>
+                
+                <p>Load NVM in your current session:</p>
+                
+                <pre><code>export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"</code></pre>
+                
+                <p>Install the LTS version of Node.js:</p>
+                
+                <pre><code>nvm install --lts</code></pre>
+                
+                <p>Verify your installation:</p>
+                
+                <pre><code>node --version
+npm --version</code></pre>
+                
+                <div class="section-tip">
+                    <strong>Why NVM?</strong> Using NVM allows you to easily switch between Node.js versions and keeps your installation isolated from the system packages.
+                </div>
+            </section>
+            
+            <section id="step2">
+                <h2>Step 2: Cloning and Setting Up the Application</h2>
+                
+                <p>Create a directory for your application:</p>
+                
+                <pre><code>mkdir -p /var/www/myapp
+cd /var/www/myapp</code></pre>
+                
+                <p>Clone your application from GitHub (replace with your repository URL):</p>
+                
+                <pre><code>git clone https://github.com/username/repository.git .</code></pre>
+                
+                <p>Install dependencies:</p>
+                
+                <pre><code>npm install --production</code></pre>
+                
+                <p>Create an environment file for your application:</p>
+                
+                <pre><code>cp .env.example .env
+nano .env</code></pre>
+                
+                <p>Configure your environment variables with appropriate values for production:</p>
+                
+                <pre><code># Example .env file
+NODE_ENV=production
+PORT=3000
+DB_CONNECTION=mongodb://username:password@localhost:27017/database
+# Other environment variables as needed</code></pre>
+                
+                <p>Build your application if needed (for Next.js, React, etc.):</p>
+                
+                <pre><code>npm run build</code></pre>
+                
+                <p>Test that your application runs correctly:</p>
+                
+                <pre><code>node app.js</code></pre>
+                
+                <p>If everything works, press Ctrl+C to stop the application.</p>
+            </section>
+            
+            <section id="step3">
+                <h2>Step 3: Setting Up PM2</h2>
+                
+                <p>Install PM2 globally:</p>
+                
+                <pre><code>npm install -g pm2</code></pre>
+                
+                <p>Start your application with PM2:</p>
+                
+                <pre><code>cd /var/www/myapp
+pm2 start app.js --name "myapp"</code></pre>
+                
+                <p>For applications using a specific npm script (like Next.js), use:</p>
+                
+                <pre><code>pm2 start npm --name "myapp" -- start</code></pre>
+                
+                <p>Configure PM2 to automatically restart your application on server reboot:</p>
+                
+                <pre><code>pm2 startup</code></pre>
+                
+                <p>Copy and run the command that PM2 provides after the previous command.</p>
+                
+                <p>Save the current PM2 processes:</p>
+                
+                <pre><code>pm2 save</code></pre>
+                
+                <p>Basic PM2 commands for managing your application:</p>
+                
+                <pre><code># View all running applications
+pm2 list
+
+# View detailed information about a specific app
+pm2 info myapp
+
+# View logs
+pm2 logs myapp
+
+# Restart application
+pm2 restart myapp
+
+# Stop application
+pm2 stop myapp
+
+# Delete application from PM2
+pm2 delete myapp</code></pre>
+                
+                <div class="section-tip">
+                    <strong>PM2 Best Practice:</strong> Set up a proper JSON configuration file for more complex applications with multiple services or custom settings.
+                </div>
+            </section>
+            
+            <section id="step4">
+                <h2>Step 4: Setting Up NGINX</h2>
+                
+                <p>Install NGINX:</p>
+                
+                <pre><code>sudo apt install nginx -y</code></pre>
+                
+                <p>Create a new NGINX configuration file for your application:</p>
+                
+                <pre><code>sudo nano /etc/nginx/sites-available/myapp</code></pre>
+                
+                <p>Add the following configuration:</p>
+                
+                <pre><code>server {
+    listen 80;
+    server_name yourdomain.com www.yourdomain.com;
+
+    location / {
+        proxy_pass http://localhost:3000;  # Port your Node.js app is running on
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}</code></pre>
+                
+                <p>Create a symbolic link to enable the site:</p>
+                
+                <pre><code>sudo ln -s /etc/nginx/sites-available/myapp /etc/nginx/sites-enabled/</code></pre>
+                
+                <p>Test the NGINX configuration for syntax errors:</p>
+                
+                <pre><code>sudo nginx -t</code></pre>
+                
+                <p>If the test is successful, restart NGINX:</p>
+                
+                <pre><code>sudo systemctl restart nginx</code></pre>
+                
+                <div class="section-tip">
+                    <strong>Performance Tip:</strong> Consider adding NGINX caching for static assets to improve performance for your users.
+                </div>
+            </section>
+            
+            <section id="step5">
+                <h2>Step 5: Enabling HTTPS with Let's Encrypt</h2>
+                
+                <p>Install Certbot for Let's Encrypt certificates:</p>
+                
+                <pre><code>sudo apt install certbot python3-certbot-nginx -y</code></pre>
+                
+                <p>Obtain an SSL certificate:</p>
+                
+                <pre><code>sudo certbot --nginx -d yourdomain.com -d www.yourdomain.com</code></pre>
+                
+                <p>Follow the prompts to complete the certificate installation. Certbot will automatically modify your NGINX configuration to use HTTPS.</p>
+                
+                <p>Test automatic renewal:</p>
+                
+                <pre><code>sudo certbot renew --dry-run</code></pre>
+                
+                <p>Certbot creates a cron job automatically, but you can verify it's set up:</p>
+                
+                <pre><code>ls -la /etc/cron.d/</code></pre>
+                
+                <div class="section-tip">
+                    <strong>Security Note:</strong> After enabling HTTPS, consider adding HTTP Strict Transport Security (HSTS) headers in your NGINX configuration for extra security.
+                </div>
+            </section>
+            
+            <section id="step6">
+                <h2>Step 6: Troubleshooting and Optimization</h2>
+                
+                <h3>Firewall Configuration</h3>
+                
+                <p>If you're using UFW (Uncomplicated Firewall), allow HTTP, HTTPS, and SSH:</p>
+                
+                <pre><code>sudo ufw allow ssh
+sudo ufw allow 'Nginx Full'
+sudo ufw enable</code></pre>
+                
+                <h3>PM2 Clustering for Performance</h3>
+                
+                <p>Leverage multiple CPU cores by using PM2 cluster mode:</p>
+                
+                <pre><code>pm2 delete myapp  # Delete the existing process first
+pm2 start app.js --name "myapp" -i max</code></pre>
+                
+                <p>This starts your application in cluster mode, utilizing all available CPU cores.</p>
+                
+                <h3>Setting Up Log Rotation</h3>
+                
+                <p>Configure PM2 log rotation to prevent log files from consuming excessive disk space:</p>
+                
+                <pre><code>pm2 install pm2-logrotate
+pm2 set pm2-logrotate:max_size 10M
+pm2 set pm2-logrotate:retain 7</code></pre>
+                
+                <h3>Monitoring Your Application</h3>
+                
+                <p>Use PM2's built-in monitoring:</p>
+                
+                <pre><code>pm2 monit</code></pre>
+                
+                <p>For more comprehensive monitoring, install PM2 Plus:</p>
+                
+                <pre><code>pm2 plus</code></pre>
+                
+                <div class="section-tip">
+                    <strong>Optimization Tip:</strong> Consider setting up server monitoring with tools like Prometheus and Grafana to get deeper insights into your server and application performance.
+                </div>
+            </section>
+            
+            <section id="conclusion">
+                <h2>Conclusion</h2>
+                
+                <p>You've now successfully deployed a Node.js full-stack application on a Linux VM with:</p>
+                
+                <ul>
+                    <li>NGINX as a reverse proxy to handle incoming requests efficiently</li>
+                    <li>PM2 for process management, ensuring high availability</li>
+                    <li>HTTPS encryption for secure data transmission</li>
+                    <li>Performance optimizations for production workloads</li>
+                </ul>
+                
+                <p>This deployment architecture provides several advantages:</p>
+                
+                <ul>
+                    <li><strong>Scalability</strong>: PM2's cluster mode allows your application to utilize all available CPU cores.</li>
+                    <li><strong>Reliability</strong>: PM2 automatically restarts your application if it crashes.</li>
+                    <li><strong>Performance</strong>: NGINX efficiently handles static content and distributes requests.</li>
+                    <li><strong>Security</strong>: HTTPS encryption protects data in transit.</li>
+                </ul>
+                
+                <p>For further improvements, consider:</p>
+                
+                <ul>
+                    <li>Implementing a CI/CD pipeline for automated deployments</li>
+                    <li>Setting up server monitoring with tools like Prometheus and Grafana</li>
+                    <li>Configuring automated backups for your application data</li>
+                    <li>Implementing rate limiting and additional security measures in NGINX</li>
+                </ul>
+                
+                <p>By following this guide, you've established a robust foundation for hosting your Node.js applications in a production environment that can scale with your needs.</p>
+            </section>
+        </article>
+        
+        <footer class="footer">
+            <p>© 2023 • All rights reserved</p>
+            <p>If you found this guide helpful, consider sharing it with your network!</p>
+        </footer>
+    </div>
+</body>
+</html>
