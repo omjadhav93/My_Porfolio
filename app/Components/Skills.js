@@ -261,14 +261,9 @@ const skill_list = [
     'Git'
 ]
 
-function SkillCard({ progress, title, onclick, hover = true, loc = null, tooltipPosition = 'top' }) {
+function SkillCard({ progress, title, onclick, hover = true, loc = null }) {
     return (
-        <div className={"flex justify-center items-center aspect-square p-7 relative group " + (hover ? " rounded-md hover:bg-slate-400 hover:bg-opacity-50 " : " bg-gray-900 bg-opacity-95")} style={loc && { gridColumn: `${loc.col} / span 1`, gridRow: `${loc.row} / span 1`, }} onClick={onclick}>
-            {hover && tooltipPosition !== 'none' && (
-                <div className={`absolute ${tooltipPosition === 'top' ? 'bottom-full mb-2' : 'top-full mt-2'} left-1/2 transform -translate-x-1/2 bg-gray-900 text-white text-xs py-1 px-2 rounded opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-300 whitespace-nowrap z-20 border border-purple-500 shadow-md`}>
-                    Click to view more details
-                </div>
-            )}
+        <div className={"flex justify-center items-center aspect-square p-7 " + (hover ? " rounded-md hover:bg-slate-400 hover:bg-opacity-50 " : " bg-gray-900 bg-opacity-95")} style={loc && { gridColumn: `${loc.col} / span 1`, gridRow: `${loc.row} / span 1`, }} onClick={onclick}>
             <div className="relative rounded-full w-3/4 aspect-square p-[6%] shadow-xl">
                 <div className="rounded-full w-full aspect-square shadow-inner flex justify-center items-center">
                     <p className={"text-xl font-bold text-center " + courier_prime.className}>{title}</p>
@@ -327,16 +322,16 @@ export default function Skills(props) {
         <section className={"mt-28 mx-auto " + props.size}>
             <div className="font-mono text-lg">.../My Skills...</div>
             <div className="grid grid-cols-5 w-full mt-2 relative">
-                <SkillCard progress={80} title={'React'} onclick={() => openSkillDetail(1, 0, 0, 80, 'React')} tooltipPosition="top" />
-                <SkillCard progress={75} title={'Next'} onclick={() => openSkillDetail(2, 30, 0, 75, 'Next')} tooltipPosition="top" />
-                <SkillCard progress={85} title={'Node'} onclick={() => openSkillDetail(3, 50, 0, 85, 'Node')} tooltipPosition="top" />
-                <SkillCard progress={65} title={'Express'} onclick={() => openSkillDetail(4, 70, 0, 65, 'Express')} tooltipPosition="top" />
-                <SkillCard progress={70} title={'MongoDB'} onclick={() => openSkillDetail(5, 100, 0, 70, 'MongoDB')} tooltipPosition="top" />
-                <SkillCard progress={90} title={'JS'} onclick={() => openSkillDetail(6, 0, 100, 90, 'JS')} tooltipPosition="bottom" />
-                <SkillCard progress={80} title={'Tailwind'} onclick={() => openSkillDetail(7, 30, 100, 80, 'Tailwind')} tooltipPosition="bottom" />
-                <SkillCard progress={45} title={'Python'} onclick={() => openSkillDetail(8, 50, 100, 45, 'Python')} tooltipPosition="bottom" />
-                <SkillCard progress={35} title={'MySQL'} onclick={() => openSkillDetail(9, 70, 100, 35, 'MySQL')} tooltipPosition="bottom" />
-                <SkillCard progress={65} title={'Git'} onclick={() => openSkillDetail(10, 100, 100, 65, 'Git')} tooltipPosition="bottom" />
+                <SkillCard progress={80} title={'React'} onclick={() => openSkillDetail(1, 0, 0, 80, 'React')} />
+                <SkillCard progress={75} title={'Next'} onclick={() => openSkillDetail(2, 30, 0, 75, 'Next')} />
+                <SkillCard progress={85} title={'Node'} onclick={() => openSkillDetail(3, 50, 0, 85, 'Node')} />
+                <SkillCard progress={65} title={'Express'} onclick={() => openSkillDetail(4, 70, 0, 65, 'Express')} />
+                <SkillCard progress={70} title={'MongoDB'} onclick={() => openSkillDetail(5, 100, 0, 70, 'MongoDB')} />
+                <SkillCard progress={90} title={'JS'} onclick={() => openSkillDetail(6, 0, 100, 90, 'JS')} />
+                <SkillCard progress={80} title={'Tailwind'} onclick={() => openSkillDetail(7, 30, 100, 80, 'Tailwind')} />
+                <SkillCard progress={45} title={'Python'} onclick={() => openSkillDetail(8, 50, 100, 45, 'Python')} />
+                <SkillCard progress={35} title={'MySQL'} onclick={() => openSkillDetail(9, 70, 100, 35, 'MySQL')} />
+                <SkillCard progress={65} title={'Git'} onclick={() => openSkillDetail(10, 100, 100, 65, 'Git')} />
                 <div ref={skillDetail} className="grid grid-cols-5 grid-rows-2 absolute w-full h-full top-0 left-0 z-10 transition-all duration-1000 scale-0">
                     {(() => {
                         const neighbors = new Set();
@@ -393,7 +388,7 @@ export default function Skills(props) {
                             const neighborCells = getNeighbors(row, col);
                             neighborCells.forEach((neighbor) => neighbors.add(neighbor));
 
-                            return <SkillCard key={index - 1} progress={item.progress} title={item.title} onclick={() => { }} hover={false} loc={{ row, col }} tooltipPosition="none" />
+                            return <SkillCard key={index - 1} progress={item.progress} title={item.title} onclick={() => { }} hover={false} loc={{ row, col }} />
                         })
 
                         const otherCells = skillItems.filter(item => item && !item.card).map((item, index) => {
