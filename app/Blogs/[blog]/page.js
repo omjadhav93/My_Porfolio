@@ -2,18 +2,18 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'next/navigation'
 
-export default function Project() {
+export default function Blog() {
     const params = useParams();
-    const project = params?.project;
+    const blog = params?.blog;
     const [htmlContent, setHtmlContent] = useState("");
     const [warning, setWarning] = useState(null);
 
     useEffect(() => {
         const fetchHtmlContent = async () => {
-            if (!project) return;
+            if (!blog) return;
 
             try {
-                const response = await fetch(`/api/getHtmlContent?route=${project}`);
+                const response = await fetch(`/api/getHtmlContent?route=Blogs/${blog}`);
                 if (response.ok) {
                     const contentType = response.headers.get("content-type");
                     if (contentType && contentType.includes("text/html")) {
@@ -33,20 +33,21 @@ export default function Project() {
         };
 
         fetchHtmlContent();
-    }, [project]);
+    }, [blog]);
 
     return (
-        <>
+        <section className='flex flex-row w-full'>
+            <div className="min-w-[20%] min-h-screen mr-1 border-r-2 border-white"></div>
             {warning ? (
-                <p className="text-red-600 font-bold text-lg p-4 border border-red-300 bg-red-100 rounded">
+                <p className="h-max mt-10 mx-auto text-red-600 font-bold text-lg p-4 border border-red-300 bg-red-100 rounded">
                     {warning}
                 </p>
             ) : (
                 <div
-                    className="container"
+                    className="container py-10 px-2"
                     dangerouslySetInnerHTML={{ __html: htmlContent }}
                 />
             )}
-        </>
+        </section>
     );
 }

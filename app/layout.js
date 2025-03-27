@@ -10,7 +10,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={poppins.className}>
+      <body className={poppins.className + ' p-0 m-0'}>
         <Navbar /> {/* Use the client-side Navbar */}
         {children}
       </body>

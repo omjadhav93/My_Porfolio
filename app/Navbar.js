@@ -26,11 +26,16 @@ export default function Navbar() {
     "/Blogs": "absolute grid grid-flow-col grid-rows-1 items-center gap-8 top-8 left-[50%] translate-x-[-50%]",
     "/About": "absolute grid grid-flow-col grid-rows-1 items-center gap-8 top-12 left-[50%] translate-x-[-50%]",
     "/Contact": "absolute grid grid-flow-col grid-rows-1 items-center gap-8 top-12 left-[50%] translate-x-[-50%]",
+    "BlogsRead": "fixed grid grid-flow-row grid-cols-1 items-left gap-8 top-20 pl-[5%]",
+    "Default": "absolute grid grid-flow-col grid-rows-1 gap-8 top-12 left-[50%] translate-x-[-50%]",
+    "IfNotTop" : "sticky grid grid-flow-col auto-cols-max gap-8 top-4 left-[50%] translate-x-[-50%] w-max bg-gray-600 bg-opacity-90 px-8 py-4 rounded-md"
   };
+
+  
 
   return (
     <nav
-      className={`z-50 transition-all duration-300 ${isAtTop ? navbarStyles[pathname] || "absolute grid grid-flow-col grid-rows-1 gap-8 top-12 left-[50%] translate-x-[-50%]" : "sticky grid grid-flow-col auto-cols-max gap-8 top-4 left-[50%] translate-x-[-50%] w-max bg-gray-600 bg-opacity-90 px-8 py-4 rounded-md"
+      className={`z-50 transition-all duration-300 ${ pathname.startsWith("/Blogs") && pathname !== "/Blogs" ? navbarStyles["BlogsRead"] : (isAtTop ? navbarStyles[pathname] || navbarStyles["Default"] : navbarStyles["IfNotTop"])
         }`}
     >
       <Link href="/#Portfolio" className="inline-block w-max font-semibold text-2xl navitem">Portfolio</Link>

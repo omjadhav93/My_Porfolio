@@ -1,11 +1,9 @@
 import Image from "next/image";
 import { courier_prime } from "./font";
-import { faArrowRight, faArrowRightLong } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 import Skills from "./Components/Skills";
 import Achievements from "./Components/Achievements";
-
+import ProjectCard from "./Components/ProjectCard";
 export default function Home() {
   return (
     <>
@@ -42,8 +40,8 @@ export default function Home() {
           </div>
         </div>
         <div className="w-max self-center flex flex-row gap-6">
-          <button type="button" className="outline-none border-none bg-green-700 text-zinc-50 font-semibold text-base px-4 py-2 rounded-lg hover:bg-green-600 active:bg-blue-500">View Portfolio</button>
-          <button type="button" className="outline-none border-none bg-slate-200 text-slate-900 font-semibold text-base px-4 py-2 rounded-lg hover:bg-slate-400 active:bg-slate-600">Contact Me</button>
+          <Link href="/#Portfolio" className="outline-none border-none bg-green-700 text-zinc-50 font-semibold text-base px-4 py-2 rounded-lg hover:bg-green-600 active:bg-blue-500">View Portfolio</Link>
+          <Link href="/Contact" className="outline-none border-none bg-slate-200 text-slate-900 font-semibold text-base px-4 py-2 rounded-lg hover:bg-slate-400 active:bg-slate-600">Contact Me</Link>
         </div>
       </section>
       <section id="Portfolio" className="about-me min-h-screen h-screen px-40 py-2">
@@ -68,19 +66,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <section className="bg-[#121212] min-h-screen h-screen px-40 py-14">
-        <div className="grid grid-cols-2 grid-rows-2 gap-1 p-1 border-2 rounded w-full h-full">
-          <div className="transition-all duration-300 col-[1/2] row-[1/2] border origin-top-left bg-green-800 hover:z-10 hover:scale-[2]"></div>
-          <div className="transition-all duration-300 col-[2/3] row-[1/2] border origin-top-right bg-red-800 hover:z-10 hover:scale-[2]"></div>
-          <div className="transition-all duration-300 col-[1/2] row-[2/3] border origin-bottom-left bg-yellow-600 hover:z-10 hover:scale-[2]"></div>
-          <div className="col-[2/3] row-[2/3] border hover:bg-slate-200 hover:bg-opacity-20">
-            <Link href={'/Projects'} className="w-full h-full flex flex-col justify-center items-center cursor-pointer">
-              <p className="text-lg font-semibold text-sky-300">Explore</p>
-              <FontAwesomeIcon icon={faArrowRight} width={25} className="text-gray-300" />
-            </Link>
-          </div>
-        </div>
-      </section >
+      <ProjectCard size={' px-40 py-2 '} />
       <Skills size={' px-40 py-2 '} />
       <Achievements />
       <section className="bg-[#121212] px-40 py-20">
