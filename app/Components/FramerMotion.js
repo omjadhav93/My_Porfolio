@@ -5,6 +5,7 @@ import { motion, AnimatePresence, inView } from "framer-motion";
 import { useContext } from "react";
 import { ViewContext } from "./AnimationWrapper";
 import { usePathname } from "next/navigation";
+import { useScreenWidth } from "@/Hooks/ScreenWidth";
 
 export default function PageWrapper({ children }) {
     const pathname = usePathname();
@@ -65,7 +66,7 @@ export function FadeInOut({ children, className }) {
 
 export function ListIn({ children, className, index }) {
     const inView = useContext(ViewContext);
-    const screenWidth = window.innerWidth;
+    const screenWidth = useScreenWidth();
     return (
         <motion.div
             animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: screenWidth }}
