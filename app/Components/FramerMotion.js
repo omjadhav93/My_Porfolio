@@ -5,7 +5,7 @@ import { motion, AnimatePresence, inView } from "framer-motion";
 import { useContext } from "react";
 import { ViewContext } from "./AnimationWrapper";
 import { usePathname } from "next/navigation";
-import { useScreenWidth } from "@/Hooks/ScreenWidth";
+import { useScreenWidth } from "../Hooks/ScreenWidth";
 
 export default function PageWrapper({ children }) {
     const pathname = usePathname();
