@@ -65,7 +65,7 @@ export function FadeInOut({ children, className }) {
 
 export function ListIn({ children, className, index }) {
     const inView = useContext(ViewContext);
-    const screenWidth = screen.width;
+    const screenWidth = window.innerWidth;
     return (
         <motion.div
             animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: screenWidth }}
