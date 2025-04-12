@@ -1,6 +1,7 @@
 "use client"
 import { useEffect, useState } from 'react'
 import { useParams } from 'next/navigation'
+import PageWrapper from '../../Components/FramerMotion';
 
 export default function Blog() {
     const params = useParams();
@@ -36,18 +37,20 @@ export default function Blog() {
     }, [blog]);
 
     return (
-        <section className='flex flex-row w-full'>
-            <div className="min-w-[20%] min-h-screen mr-1 border-r-2 border-white"></div>
-            {warning ? (
-                <p className="h-max mt-10 mx-auto text-red-600 font-bold text-lg p-4 border border-red-300 bg-red-100 rounded">
-                    {warning}
-                </p>
-            ) : (
-                <div
-                    className="container py-10 px-2"
-                    dangerouslySetInnerHTML={{ __html: htmlContent }}
-                />
-            )}
-        </section>
+        <PageWrapper>
+            <section className='flex flex-row w-full'>
+                <div className="min-w-[20%] min-h-screen mr-1 border-r-2 border-white"></div>
+                {warning ? (
+                    <p className="h-max mt-10 mx-auto text-red-600 font-bold text-lg p-4 border border-red-300 bg-red-100 rounded">
+                        {warning}
+                    </p>
+                ) : (
+                    <div
+                        className="container py-10 px-2"
+                        dangerouslySetInnerHTML={{ __html: htmlContent }}
+                    />
+                )}
+            </section>
+        </PageWrapper>
     );
 }

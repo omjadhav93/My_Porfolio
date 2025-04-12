@@ -1,6 +1,8 @@
 "use client"
 import { useRef, useState } from "react";
 import { courier_prime } from "../font";
+import AnimatedSectionWrapper from "./AnimationWrapper";
+import { FadeInOut, ListIn } from "./FramerMotion";
 
 const skill_data = {
     "React": {
@@ -324,98 +326,122 @@ export default function Skills(props) {
     }
 
     return (
-        <section className={"mt-28 mx-auto " + props.size}>
-            <div className="font-mono text-lg">.../My Skills...</div>
-            <div className="grid grid-cols-5 w-full mt-2 relative">
-                <SkillCard progress={80} title={'React'} onclick={() => openSkillDetail(1, 0, 0, 80, 'React')} tooltipPosition="top" />
-                <SkillCard progress={75} title={'Next'} onclick={() => openSkillDetail(2, 30, 0, 75, 'Next')} tooltipPosition="top" />
-                <SkillCard progress={85} title={'Node'} onclick={() => openSkillDetail(3, 50, 0, 85, 'Node')} tooltipPosition="top" />
-                <SkillCard progress={65} title={'Express'} onclick={() => openSkillDetail(4, 70, 0, 65, 'Express')} tooltipPosition="top" />
-                <SkillCard progress={70} title={'MongoDB'} onclick={() => openSkillDetail(5, 100, 0, 70, 'MongoDB')} tooltipPosition="top" />
-                <SkillCard progress={90} title={'JS'} onclick={() => openSkillDetail(6, 0, 100, 90, 'JS')} tooltipPosition="bottom" />
-                <SkillCard progress={80} title={'Tailwind'} onclick={() => openSkillDetail(7, 30, 100, 80, 'Tailwind')} tooltipPosition="bottom" />
-                <SkillCard progress={45} title={'Python'} onclick={() => openSkillDetail(8, 50, 100, 45, 'Python')} tooltipPosition="bottom" />
-                <SkillCard progress={35} title={'MySQL'} onclick={() => openSkillDetail(9, 70, 100, 35, 'MySQL')} tooltipPosition="bottom" />
-                <SkillCard progress={65} title={'Git'} onclick={() => openSkillDetail(10, 100, 100, 65, 'Git')} tooltipPosition="bottom" />
-                <div ref={skillDetail} className="grid grid-cols-5 grid-rows-2 absolute w-full h-full top-0 left-0 z-10 transition-all duration-1000 scale-0">
-                    {(() => {
-                        const neighbors = new Set();
-                        const GRID_COLS = 5; // Number of columns in the grid
-                        const GRID_ROWS = 2; // Number of rows in the grid
+        <AnimatedSectionWrapper>
+            <section className={"mt-28 mx-auto " + props.size}>
+                <FadeInOut>
+                    <div className="font-mono text-lg">.../My Skills...</div>
+                </FadeInOut>
+                <div className="grid grid-cols-5 w-full mt-2 relative">
+                    <ListIn index={1}>
+                        <SkillCard progress={80} title={'React'} onclick={() => openSkillDetail(1, 0, 0, 80, 'React')} tooltipPosition="top" />
+                    </ListIn>
+                    <ListIn index={2}>
+                        <SkillCard progress={75} title={'Next'} onclick={() => openSkillDetail(2, 30, 0, 75, 'Next')} tooltipPosition="top" />
+                    </ListIn>
+                    <ListIn index={3}>
+                        <SkillCard progress={85} title={'Node'} onclick={() => openSkillDetail(3, 50, 0, 85, 'Node')} tooltipPosition="top" />
+                    </ListIn>
+                    <ListIn index={4}>
+                        <SkillCard progress={65} title={'Express'} onclick={() => openSkillDetail(4, 70, 0, 65, 'Express')} tooltipPosition="top" />
+                    </ListIn>
+                    <ListIn index={5}>
+                        <SkillCard progress={70} title={'MongoDB'} onclick={() => openSkillDetail(5, 100, 0, 70, 'MongoDB')} tooltipPosition="top" />
+                    </ListIn>
+                    <ListIn index={6}>
+                        <SkillCard progress={90} title={'JS'} onclick={() => openSkillDetail(6, 0, 100, 90, 'JS')} tooltipPosition="bottom" />
+                    </ListIn>
+                    <ListIn index={7}>
+                        <SkillCard progress={80} title={'Tailwind'} onclick={() => openSkillDetail(7, 30, 100, 80, 'Tailwind')} tooltipPosition="bottom" />
+                    </ListIn>
+                    <ListIn index={8}>
+                        <SkillCard progress={45} title={'Python'} onclick={() => openSkillDetail(8, 50, 100, 45, 'Python')} tooltipPosition="bottom" />
+                    </ListIn>
+                    <ListIn index={9}>
+                        <SkillCard progress={35} title={'MySQL'} onclick={() => openSkillDetail(9, 70, 100, 35, 'MySQL')} tooltipPosition="bottom" />
+                    </ListIn>
+                    <ListIn index={10}>
+                        <SkillCard progress={65} title={'Git'} onclick={() => openSkillDetail(10, 100, 100, 65, 'Git')} tooltipPosition="bottom" />
+                    </ListIn>
+                    <div ref={skillDetail} className="grid grid-cols-5 grid-rows-2 absolute w-full h-full top-0 left-0 z-10 transition-all duration-1000 scale-0">
+                        {(() => {
+                            const neighbors = new Set();
+                            const GRID_COLS = 5; // Number of columns in the grid
+                            const GRID_ROWS = 2; // Number of rows in the grid
 
-                        const getNeighbors = (row, col) => {
-                            let neighborCells = [];
-                            const dirMidCells = [
-                                [-1, 0], // Up
-                                [1, 0], // Down
-                                [0, -1], // Left
-                                [0, 1], // Right
-                                [-1, -1], // Top-left diagonal
-                                [-1, 1], // Top-right diagonal
-                                [1, -1], // Bottom-left diagonal
-                                [1, 1], // Bottom-right diagonal
-                                // Only five directions will be valid here.
-                            ];
-                            const dirCornerCells = [
-                                [0, -2], // Double Left
-                                [0, 2], // Double Right
-                                [-1, -2], // Top-double-left diagonal
-                                [-1, 2], // Top-double-right diagonal
-                                [1, -2], // Bottom-double-left diagonal
-                                [1, 2], // Bottom-double-right diagonal 
-                                // Only two cells will be valid here for corners.
-                            ]
+                            const getNeighbors = (row, col) => {
+                                let neighborCells = [];
+                                const dirMidCells = [
+                                    [-1, 0], // Up
+                                    [1, 0], // Down
+                                    [0, -1], // Left
+                                    [0, 1], // Right
+                                    [-1, -1], // Top-left diagonal
+                                    [-1, 1], // Top-right diagonal
+                                    [1, -1], // Bottom-left diagonal
+                                    [1, 1], // Bottom-right diagonal
+                                    // Only five directions will be valid here.
+                                ];
+                                const dirCornerCells = [
+                                    [0, -2], // Double Left
+                                    [0, 2], // Double Right
+                                    [-1, -2], // Top-double-left diagonal
+                                    [-1, 2], // Top-double-right diagonal
+                                    [1, -2], // Bottom-double-left diagonal
+                                    [1, 2], // Bottom-double-right diagonal 
+                                    // Only two cells will be valid here for corners.
+                                ]
 
-                            for (const [dRow, dCol] of dirMidCells) {
-                                const nRow = row + dRow;
-                                const nCol = col + dCol;
-                                if (nRow > 0 && nRow <= GRID_ROWS && nCol > 0 && nCol <= GRID_COLS) {
-                                    neighborCells.push(`${nRow}-${nCol}`);
-                                }
-                            }
-
-                            if (col === 1 || col === 5) {
-                                for (const [dRow, dCol] of dirCornerCells) {
+                                for (const [dRow, dCol] of dirMidCells) {
                                     const nRow = row + dRow;
                                     const nCol = col + dCol;
                                     if (nRow > 0 && nRow <= GRID_ROWS && nCol > 0 && nCol <= GRID_COLS) {
                                         neighborCells.push(`${nRow}-${nCol}`);
                                     }
                                 }
+
+                                if (col === 1 || col === 5) {
+                                    for (const [dRow, dCol] of dirCornerCells) {
+                                        const nRow = row + dRow;
+                                        const nCol = col + dCol;
+                                        if (nRow > 0 && nRow <= GRID_ROWS && nCol > 0 && nCol <= GRID_COLS) {
+                                            neighborCells.push(`${nRow}-${nCol}`);
+                                        }
+                                    }
+                                }
+
+                                return neighborCells;
                             }
 
-                            return neighborCells;
-                        }
+                            const skillCard = skillItems.filter(item => item && item.card).map((item, index) => {
+                                const col = item.grid_loc <= GRID_COLS ? item.grid_loc : item.grid_loc - GRID_COLS;
+                                const row = item.grid_loc <= GRID_COLS ? 1 : 2;
+                                const neighborCells = getNeighbors(row, col);
+                                neighborCells.forEach((neighbor) => neighbors.add(neighbor));
 
-                        const skillCard = skillItems.filter(item => item && item.card).map((item, index) => {
-                            const col = item.grid_loc <= GRID_COLS ? item.grid_loc : item.grid_loc - GRID_COLS;
-                            const row = item.grid_loc <= GRID_COLS ? 1 : 2;
-                            const neighborCells = getNeighbors(row, col);
-                            neighborCells.forEach((neighbor) => neighbors.add(neighbor));
+                                return <SkillCard key={index - 1} progress={item.progress} title={item.title} onclick={() => { }} hover={false} loc={{ row, col }} tooltipPosition="none" />
+                            })
 
-                            return <SkillCard key={index - 1} progress={item.progress} title={item.title} onclick={() => { }} hover={false} loc={{ row, col }} tooltipPosition="none" />
-                        })
+                            const otherCells = skillItems.filter(item => item && !item.card).map((item, index) => {
+                                let Cell = Array.from(neighbors)[index]; // Place in already calculated neighbor cells
+                                const [row, col] = Cell.split("-").map(Number);
 
-                        const otherCells = skillItems.filter(item => item && !item.card).map((item, index) => {
-                            let Cell = Array.from(neighbors)[index]; // Place in already calculated neighbor cells
-                            const [row, col] = Cell.split("-").map(Number);
+                                return (
+                                    <div key={index} className="flex flex-col gap-1 bg-gray-900 px-3 py-2" style={{ gridColumn: `${col} / span 1`, gridRow: `${row} / span 1` }}>
+                                        <h3 className="text-base font-semibold text-green-400">{Object.keys(item)[0]}</h3>
+                                        <ul className="flex flex-col gap-2 list-disc list-inside">
+                                            {Object.values(item)[0].map((value, i) => {
+                                                return <li key={i} className="text-xs font-medium text-amber-400">{value}</li>
+                                            })}
+                                        </ul>
+                                    </div>
+                                )
+                            })
 
-                            return (
-                                <div key={index} className="flex flex-col gap-1 bg-gray-900 px-3 py-2" style={{ gridColumn: `${col} / span 1`, gridRow: `${row} / span 1` }}>
-                                    <h3 className="text-base font-semibold text-green-400">{Object.keys(item)[0]}</h3>
-                                    <ul className="flex flex-col gap-2 list-disc list-inside">
-                                        {Object.values(item)[0].map((value, i) => {
-                                            return <li key={i} className="text-xs font-medium text-amber-400">{value}</li>
-                                        })}
-                                    </ul>
-                                </div>
-                            )
-                        })
-
-                        return [...skillCard, ...otherCells];
-                    })()}
+                            return [...skillCard, ...otherCells];
+                        })()}
+                    </div>
                 </div>
-            </div>
-        </section >
+            </section >
+        </AnimatedSectionWrapper>
     )
 }

@@ -1,5 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { ListIn } from "./FramerMotion";
+import AnimatedSectionWrapper from "./AnimationWrapper";
 
 const ProjectGrid = (props) => {
     const projects = [
@@ -24,42 +26,46 @@ const ProjectGrid = (props) => {
     ];
 
     return (
-        <section className={"mt-16 mx-auto " + props.size}>
-            <div className="font-mono text-lg">.../My Projects...</div>
-            <div className="grid grid-cols-1 mt-10 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {projects.map((project, index) => (
-                    <Link key={index} href={`/Projects/${project.projectId}`} className="block h-full">
-                        <div className="bg-slate-900 rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 h-full flex flex-col">
-                            <div className="relative w-full aspect-video">
-                                {project.image.endsWith('.mp4') ? (
-                                    <video
-                                        autoPlay
-                                        loop
-                                        muted
-                                        playsInline
-                                        className="w-full h-full object-cover"
-                                    >
-                                        <source src={project.image} type="video/mp4" />
-                                    </video>
-                                ) : (
-                                    <Image
-                                        src={project.image}
-                                        alt={project.title}
-                                        fill
-                                        className="object-cover"
-                                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                                    />
-                                )}
-                            </div>
-                            <div className="p-4 flex-grow">
-                                <h3 className="text-xl font-semibold text-blue-400 mb-2">{project.title}</h3>
-                                <p className="text-sm text-neutral-300 line-clamp-2">{project.description}</p>
-                            </div>
-                        </div>
-                    </Link>
-                ))}
-            </div>
-        </section>
+        <AnimatedSectionWrapper>
+            <section className={"mt-16 mx-auto " + props.size}>
+                <div className="font-mono text-lg">.../My Projects...</div>
+                <div className="grid grid-cols-1 mt-10 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {projects.map((project, index) => (
+                        <ListIn key={index} index={index}>
+                            <Link href={`/Projects/${project.projectId}`} className="block h-full">
+                                <div className="bg-slate-900 rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 h-full flex flex-col">
+                                    <div className="relative w-full aspect-video">
+                                        {project.image.endsWith('.mp4') ? (
+                                            <video
+                                                autoPlay
+                                                loop
+                                                muted
+                                                playsInline
+                                                className="w-full h-full object-cover"
+                                            >
+                                                <source src={project.image} type="video/mp4" />
+                                            </video>
+                                        ) : (
+                                            <Image
+                                                src={project.image}
+                                                alt={project.title}
+                                                fill
+                                                className="object-cover"
+                                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                            />
+                                        )}
+                                    </div>
+                                    <div className="p-4 flex-grow">
+                                        <h3 className="text-xl font-semibold text-blue-400 mb-2">{project.title}</h3>
+                                        <p className="text-sm text-neutral-300 line-clamp-2">{project.description}</p>
+                                    </div>
+                                </div>
+                            </Link>
+                        </ListIn>
+                    ))}
+                </div>
+            </section>
+        </AnimatedSectionWrapper>
     );
 };
 

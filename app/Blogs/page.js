@@ -3,6 +3,7 @@
 import Image from "next/image"
 import Link from "next/link"
 import { useEffect, useState } from "react"
+import PageWrapper from "../Components/FramerMotion"
 
 const sortingKeys = [
   { key: 1, label: 'Latest', active: true },
@@ -39,16 +40,16 @@ export default function Blogs() {
   }
 
   return (
-    <>
-      <section className='flex flex-col mt-44 w-4/5 mx-auto'>
+    <PageWrapper>
+      <section className='flex flex-col mt-44 md:mt-32 sm:mt-24 w-4/5 mx-auto'>
         <h4 className='text-lg font-mono w-full'>.../Top Highlight ...</h4>
-        <div className="flex flex-row justify-center w-full">
-          <div className='flex justify-end w-1/2 p-4 pt-0'>
+        <div className="flex flex-col md:flex-row justify-center w-full">
+          <div className='flex justify-center md:justify-end w-full md:w-1/2 p-4 pt-0'>
             {blogList
               .filter(item => item.Highlighted)
               .map((item, index) => (
                 index === 0 ? (
-                  <div key={index} className='border-none rounded-lg overflow-hidden bg-slate-800 mt-8 w-3/4'>
+                  <div key={index} className='border-none rounded-lg overflow-hidden bg-slate-800 mt-8 w-full md:w-3/4'>
                     <Link href={"/Blogs/" + item.Name} className="cursor-pointer">
                       <Image src={item.Image} alt="Image" width={0} height={0} sizes="100vw" style={{ width: "100%", maxWidth: '100%', height: 'auto', maxHeight: "250px", objectFit: "cover" }}></Image>
                     </Link>
@@ -67,12 +68,12 @@ export default function Blogs() {
                 ) : null
               ))}
           </div>
-          <div className='flex justify-start w-1/2 p-4 pt-0'>
+          <div className='flex justify-center md:justify-start w-full md:w-1/2 p-4 pt-0'>
             {blogList
               .filter(item => item.Highlighted)
               .map((item, index) => (
                 index === 1 ? (
-                  <div key={index} className='border-none rounded-lg overflow-hidden bg-slate-800 mt-8 w-3/4'>
+                  <div key={index} className='border-none rounded-lg overflow-hidden bg-slate-800 mt-8 w-full md:w-3/4'>
                     <Link href={"/Blogs/" + item.Name} className="cursor-pointer">
                       <Image src={item.Image} alt="Image" width={0} height={0} sizes="100vw" style={{ width: "100%", maxWidth: '100%', height: 'auto', maxHeight: "250px", objectFit: "cover" }}></Image>
                     </Link>
@@ -93,18 +94,18 @@ export default function Blogs() {
           </div>
         </div>
       </section>
-      <section className="w-4/5 mx-auto p-4 mt-12">
-        <div className="flex gap-2">
+      <section className="w-11/12 md:w-4/5 mx-auto p-4 mt-12">
+        <div className="flex flex-wrap gap-2">
           {sortkeys.map(item => {
             return item.active ?
-              <button key={item.key} type="button" className="rounded-lg bg-gray-500 px-3 py-1 text-base font-normal text-stone-900" onClick={() => handleSorting(item.key)}>{item.label}</button>
+              <button key={item.key} type="button" className="rounded-lg bg-gray-500 px-3 py-1 text-sm md:text-base font-normal text-stone-900" onClick={() => handleSorting(item.key)}>{item.label}</button>
               :
-              <button key={item.key} type="button" className="rounded-lg bg-slate-300 px-3 py-1 text-base font-normal text-black" onClick={() => handleSorting(item.key)}>{item.label}</button>
+              <button key={item.key} type="button" className="rounded-lg bg-slate-300 px-3 py-1 text-sm md:text-base font-normal text-black" onClick={() => handleSorting(item.key)}>{item.label}</button>
           })}
         </div>
         <div className="flex flex-row flex-wrap gap-x-4 gap-y-14 justify-evenly mt-6">
           {blogList.filter(item => !item.Highlighted).map((item, index) =>
-            <div key={index} className="w-80 min-h-[400px] border-none rounded-lg overflow-hidden bg-slate-800">
+            <div key={index} className="w-full sm:w-[45%] md:w-80 min-h-[400px] border-none rounded-lg overflow-hidden bg-slate-800">
               <Link href={"/Blogs/" + item.Name} className="cursor-pointer">
                 <Image src={item.Image} alt="Image" width={0} height={0} sizes="100vw" style={{ width: "100%", maxWidth: '100%', height: 'auto', maxHeight: "250px", objectFit: "cover" }}></Image>
               </Link>
@@ -123,6 +124,6 @@ export default function Blogs() {
           )}
         </div>
       </section>
-    </>
+    </PageWrapper>
   )
 }
