@@ -27,9 +27,9 @@ const ProjectGrid = (props) => {
 
     return (
         <AnimatedSectionWrapper>
-            <section className={"mt-16 mx-auto " + props.size}>
-                <div className="font-mono text-lg">.../My Projects...</div>
-                <div className="grid grid-cols-1 mt-10 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <section className={"mt-16 mx-auto xl:px-40 lg:px-24 md:px-12 sm:px-10 px-8"}>
+                <div className="font-mono xl:text-xl lg:text-lg md:text-base text-sm">.../My Projects...</div>
+                <div className="grid mt-10 grid-cols-2 lg:grid-cols-3 xl:gap-8 lg:gap-6 md:gap-4 gap-3">
                     {projects.map((project, index) => (
                         <ListIn key={index} index={index}>
                             <Link href={`/Projects/${project.projectId}`} className="block h-full">
@@ -56,8 +56,8 @@ const ProjectGrid = (props) => {
                                         )}
                                     </div>
                                     <div className="p-4 flex-grow">
-                                        <h3 className="text-xl font-semibold text-blue-400 mb-2">{project.title}</h3>
-                                        <p className="text-sm text-neutral-300 line-clamp-2">{project.description}</p>
+                                        <h3 className="xl:text-xl lg:text-lg md:text-base text-sm font-semibold text-blue-400 mb-2">{project.title}</h3>
+                                        <p className="xl:text-base lg:text-sm md:text-xs text-[10px] text-neutral-300 line-clamp-2">{project.description}</p>
                                     </div>
                                 </div>
                             </Link>

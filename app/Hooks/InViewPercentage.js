@@ -1,4 +1,5 @@
 // hooks/useInViewPercentage.js
+"use client"
 import { useEffect, useState } from "react";
 
 export default function useInViewPercentage(ref) {
@@ -10,7 +11,11 @@ export default function useInViewPercentage(ref) {
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        setInView(entry.intersectionRatio > 0.5); // adjust threshold here
+        if(entry.target.offsetHeight > window.innerWidth){
+          setInView(entry.isIntersecting)
+        }else{
+          setInView(entry.intersectionRatio > 0.5); // adjust threshold here
+        }
       },
       {
         threshold: Array.from({ length: 101 }, (_, i) => i / 100),

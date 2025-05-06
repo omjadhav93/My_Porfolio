@@ -3,6 +3,7 @@ import { useRef, useState } from "react";
 import { courier_prime } from "../font";
 import AnimatedSectionWrapper from "./AnimationWrapper";
 import { FadeInOut, ListIn } from "./FramerMotion";
+import { useScreenWidth } from "../Hooks/ScreenWidth";
 
 const skill_data = {
     "React": {
@@ -265,7 +266,7 @@ const skill_list = [
 
 function SkillCard({ progress, title, onclick, hover = true, loc = null, tooltipPosition = 'top' }) {
     return (
-        <div className={"flex justify-center items-center aspect-square p-7 relative group " + (hover ? " rounded-md hover:bg-slate-400 hover:bg-opacity-50 " : " bg-gray-900 bg-opacity-95")} style={loc && { gridColumn: `${loc.col} / span 1`, gridRow: `${loc.row} / span 1`, }} onClick={onclick}>
+        <div className={"flex justify-center items-center aspect-square lg:p-7 p-4 relative group " + (hover ? " rounded-md hover:bg-slate-400 hover:bg-opacity-50 " : " bg-gray-900 bg-opacity-95")} style={loc && { gridColumn: `${loc.col} / span 1`, gridRow: `${loc.row} / span 1`, }} onClick={onclick}>
             {hover && tooltipPosition !== 'none' && (
                 <div className={`absolute ${tooltipPosition === 'top' ? 'bottom-full mb-2' : 'top-full mt-2'} left-1/2 transform -translate-x-1/2 bg-gray-900 text-white text-xs py-1 px-2 rounded opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-300 whitespace-nowrap z-20 border border-purple-500 shadow-md`}>
                     Click to view more details
@@ -273,7 +274,7 @@ function SkillCard({ progress, title, onclick, hover = true, loc = null, tooltip
             )}
             <div className="relative rounded-full w-3/4 aspect-square p-[6%] shadow-xl">
                 <div className="rounded-full w-full aspect-square shadow-inner flex justify-center items-center">
-                    <p className={"text-xl font-bold text-center " + courier_prime.className}>{title}</p>
+                    <p className={"2xl:text-xl xl:text-lg text-base font-bold text-center " + courier_prime.className}>{title}</p>
                 </div>
                 <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" viewBox="0 0 100 100" className="absolute top-0 left-0">
                     <defs>
@@ -291,12 +292,26 @@ function SkillCard({ progress, title, onclick, hover = true, loc = null, tooltip
 
 export default function Skills(props) {
     const skillDetail = useRef(null);
+    const screenWidth = useScreenWidth();
     const [skillItems, setSkillItems] = useState([])
 
     const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
-    const openSkillDetail = async (grid_loc, x_origin, y_origin, progress, title) => {
+    const openSkillDetail = async (grid_loc, progress, title) => {
         const skillBox = skillDetail.current;
+        let GRID_COLS = 5; // Number of columns in the grid
+        let GRID_ROWS = 2; // Number of rows in the grid
+        if (screenWidth < 1024) {
+            GRID_COLS = 4
+            GRID_ROWS = 3
+        } else if (screenWidth < 768) {
+            GRID_COLS = 3
+            GRID_ROWS = 4
+        }
+
+        let x_origin = grid_loc % GRID_COLS != 0 ? (100 / GRID_COLS) * Math.floor((grid_loc % GRID_COLS)) - (50 / GRID_COLS) : 100
+        let y_origin = grid_loc % GRID_COLS != 0 ? (100 / GRID_ROWS) * Math.floor((grid_loc / GRID_COLS)) + (50 / GRID_ROWS) : (100 / GRID_ROWS) * Math.floor((grid_loc / GRID_COLS) - 1) + (50 / GRID_ROWS)
+
         skillBox.style.transformOrigin = `${x_origin}% ${y_origin}%`;
         await sleep(500);
         let data = skill_data[title];
@@ -315,14 +330,21 @@ export default function Skills(props) {
         skillBox.classList.remove('scale-0')
         skillBox.classList.add('scale-1')
 
-        const handleMouseOut = async () => {
+        const handleSkillBoxOut = async (event) => {
+            if (event && skillBox.contains(event.target)){
+                return;
+            }
             skillBox.classList.remove('scale-1')
             skillBox.classList.add('scale-0')
-            skillBox.removeEventListener('mouseout', handleMouseOut);
+            document.removeEventListener("click", handleSkillBoxOut);
+            document.removeEventListener("touchstart", handleSkillBoxOut);
+            window.removeEventListener("scroll", handleSkillBoxOut)
             await sleep(500);
             setSkillItems([])
         }
-        skillBox.addEventListener('mouseout', handleMouseOut)
+        document.addEventListener("click", handleSkillBoxOut);
+        document.addEventListener("touchstart", handleSkillBoxOut);
+        window.addEventListener("scroll", handleSkillBoxOut)
     }
 
     return (
@@ -331,52 +353,59 @@ export default function Skills(props) {
                 <FadeInOut>
                     <div className="font-mono text-lg">.../My Skills...</div>
                 </FadeInOut>
-                <div className="grid grid-cols-5 w-full mt-2 relative">
+                <div className="grid lg:grid-cols-5 sm:grid-cols-4 grid-cols-3 w-full mt-2 relative">
                     <ListIn index={1}>
-                        <SkillCard progress={80} title={'React'} onclick={() => openSkillDetail(1, 0, 0, 80, 'React')} tooltipPosition="top" />
+                        <SkillCard progress={80} title={'React'} onclick={() => openSkillDetail(1, 80, 'React')} tooltipPosition="top" />
                     </ListIn>
                     <ListIn index={2}>
-                        <SkillCard progress={75} title={'Next'} onclick={() => openSkillDetail(2, 30, 0, 75, 'Next')} tooltipPosition="top" />
+                        <SkillCard progress={75} title={'Next'} onclick={() => openSkillDetail(2, 75, 'Next')} tooltipPosition="top" />
                     </ListIn>
                     <ListIn index={3}>
-                        <SkillCard progress={85} title={'Node'} onclick={() => openSkillDetail(3, 50, 0, 85, 'Node')} tooltipPosition="top" />
+                        <SkillCard progress={85} title={'Node'} onclick={() => openSkillDetail(3, 85, 'Node')} tooltipPosition="top" />
                     </ListIn>
                     <ListIn index={4}>
-                        <SkillCard progress={65} title={'Express'} onclick={() => openSkillDetail(4, 70, 0, 65, 'Express')} tooltipPosition="top" />
+                        <SkillCard progress={65} title={'Express'} onclick={() => openSkillDetail(4, 65, 'Express')} tooltipPosition="top" />
                     </ListIn>
                     <ListIn index={5}>
-                        <SkillCard progress={70} title={'MongoDB'} onclick={() => openSkillDetail(5, 100, 0, 70, 'MongoDB')} tooltipPosition="top" />
+                        <SkillCard progress={70} title={'MongoDB'} onclick={() => openSkillDetail(5, 70, 'MongoDB')} tooltipPosition="top" />
                     </ListIn>
                     <ListIn index={6}>
-                        <SkillCard progress={90} title={'JS'} onclick={() => openSkillDetail(6, 0, 100, 90, 'JS')} tooltipPosition="bottom" />
+                        <SkillCard progress={90} title={'JS'} onclick={() => openSkillDetail(6, 90, 'JS')} tooltipPosition="bottom" />
                     </ListIn>
                     <ListIn index={7}>
-                        <SkillCard progress={80} title={'Tailwind'} onclick={() => openSkillDetail(7, 30, 100, 80, 'Tailwind')} tooltipPosition="bottom" />
+                        <SkillCard progress={80} title={'Tailwind'} onclick={() => openSkillDetail(7, 80, 'Tailwind')} tooltipPosition="bottom" />
                     </ListIn>
                     <ListIn index={8}>
-                        <SkillCard progress={45} title={'Python'} onclick={() => openSkillDetail(8, 50, 100, 45, 'Python')} tooltipPosition="bottom" />
+                        <SkillCard progress={45} title={'Python'} onclick={() => openSkillDetail(8, 45, 'Python')} tooltipPosition="bottom" />
                     </ListIn>
                     <ListIn index={9}>
-                        <SkillCard progress={35} title={'MySQL'} onclick={() => openSkillDetail(9, 70, 100, 35, 'MySQL')} tooltipPosition="bottom" />
+                        <SkillCard progress={35} title={'MySQL'} onclick={() => openSkillDetail(9, 35, 'MySQL')} tooltipPosition="bottom" />
                     </ListIn>
                     <ListIn index={10}>
-                        <SkillCard progress={65} title={'Git'} onclick={() => openSkillDetail(10, 100, 100, 65, 'Git')} tooltipPosition="bottom" />
+                        <SkillCard progress={65} title={'Git'} onclick={() => openSkillDetail(10, 65, 'Git')} tooltipPosition="bottom" />
                     </ListIn>
-                    <div ref={skillDetail} className="grid grid-cols-5 grid-rows-2 absolute w-full h-full top-0 left-0 z-10 transition-all duration-1000 scale-0">
+                    <div ref={skillDetail} className="grid lg:grid-cols-5 sm:grid-cols-4 grid-cols-3 lg:grid-rows-2 sm:grid-rows-3 grid-rows-4 absolute w-full h-full top-0 left-0 z-10 transition-all duration-1000 scale-0">
                         {(() => {
                             const neighbors = new Set();
-                            const GRID_COLS = 5; // Number of columns in the grid
-                            const GRID_ROWS = 2; // Number of rows in the grid
+                            let GRID_COLS = 5; // Number of columns in the grid
+                            let GRID_ROWS = 2; // Number of rows in the grid
+                            if (screenWidth < 1024) {
+                                GRID_COLS = 4
+                                GRID_ROWS = 3
+                            } else if (screenWidth < 768) {
+                                GRID_COLS = 3
+                                GRID_ROWS = 4
+                            }
 
                             const getNeighbors = (row, col) => {
                                 let neighborCells = [];
                                 const dirMidCells = [
                                     [-1, 0], // Up
-                                    [1, 0], // Down
                                     [0, -1], // Left
                                     [0, 1], // Right
                                     [-1, -1], // Top-left diagonal
                                     [-1, 1], // Top-right diagonal
+                                    [1, 0], // Down
                                     [1, -1], // Bottom-left diagonal
                                     [1, 1], // Bottom-right diagonal
                                     // Only five directions will be valid here.
@@ -399,7 +428,7 @@ export default function Skills(props) {
                                     }
                                 }
 
-                                if (col === 1 || col === 5) {
+                                if (col === 1 || col === GRID_COLS) {
                                     for (const [dRow, dCol] of dirCornerCells) {
                                         const nRow = row + dRow;
                                         const nCol = col + dCol;
@@ -413,8 +442,8 @@ export default function Skills(props) {
                             }
 
                             const skillCard = skillItems.filter(item => item && item.card).map((item, index) => {
-                                const col = item.grid_loc <= GRID_COLS ? item.grid_loc : item.grid_loc - GRID_COLS;
-                                const row = item.grid_loc <= GRID_COLS ? 1 : 2;
+                                const row = item.grid_loc % GRID_COLS == 0 ? Math.floor(item.grid_loc / GRID_COLS) : Math.floor(item.grid_loc / GRID_COLS) + 1;
+                                const col = item.grid_loc <= GRID_COLS ? item.grid_loc : item.grid_loc - (row - 1) * GRID_COLS;
                                 const neighborCells = getNeighbors(row, col);
                                 neighborCells.forEach((neighbor) => neighbors.add(neighbor));
 
@@ -426,9 +455,9 @@ export default function Skills(props) {
                                 const [row, col] = Cell.split("-").map(Number);
 
                                 return (
-                                    <div key={index} className="flex flex-col gap-1 bg-gray-900 px-3 py-2" style={{ gridColumn: `${col} / span 1`, gridRow: `${row} / span 1` }}>
+                                    <div key={index} className="flex flex-col gap-1 bg-gray-900 px-3 py-2 min-h-max" style={{ gridColumn: `${col} / span 1`, gridRow: `${row} / span 1` }}>
                                         <h3 className="text-base font-semibold text-green-400">{Object.keys(item)[0]}</h3>
-                                        <ul className="flex flex-col gap-2 list-disc list-inside">
+                                        <ul className="flex flex-col gap-1 list-disc list-inside">
                                             {Object.values(item)[0].map((value, i) => {
                                                 return <li key={i} className="text-xs font-medium text-amber-400">{value}</li>
                                             })}
