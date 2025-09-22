@@ -12,6 +12,38 @@ export default function Projects() {
   return (
     <PageWrapper>
       <section className="flex flex-col gap-14 py-10 w-4/5 mx-auto mt-40">
+        {/* Smart Link */}
+        <AnimatedSectionWrapper>
+          <FadeInOut className="flex flex-row gap-6 rounded-lg shadow-lg w-full bg-slate-900 p-4">
+            <WipeLeftToRight className="flex flex-col gap-2 w-3/5">
+              <h1 className={"text-3xl font-semibold text-blue-400 " + noto_serif.className}>Smart Link - Real-Time Bus Tracking System</h1>
+              <div className="flex flex-col gap-[2px] pl-1 text-sm font-medium leading-loose tracking-widest font-[helvetica]">
+                <p>A smart public transport solution that allows passengers to track buses in real-time. Developed for the Smart India Hackathon (SIH), this project won at the university level.</p>
+                <p>As the Backend Engineer, I developed the server-side logic, including a route-finding algorithm using Dijkstra's, real-time data processing with WebSockets, and RESTful APIs for the user app and admin dashboard.</p>
+              </div>
+              <ul className="list-disc list-inside text-sm pl-1 text-neutral-300 font-medium leading-normal tracking-widest font-[helvetica]">
+                <li><span className="text-blue-300 font-semibold">Real-Time Tracking:</span> Passengers can track live bus locations and receive accurate ETAs.</li>
+                <li><span className="text-blue-300 font-semibold">Advanced Route Search:</span> A custom search engine powered by Dijkstra's algorithm to find the most efficient routes.</li>
+                <li><span className="text-blue-300 font-semibold">Fleet Management Dashboard:</span> An admin dashboard to monitor fleet operations and performance metrics.</li>
+                <li><span className="text-blue-300 font-semibold">RESTful APIs:</span> Developed APIs to serve data to the mobile app and the analytical dashboard.</li>
+                <li><span className="text-blue-300 font-semibold">Real-Time Data Processing:</span> Used WebSockets for low-latency broadcasting of GPS coordinates to clients.</li>
+              </ul>
+              <button type="button" className="w-max bg-sky-700 px-3 font-mono mx-auto py-1 rounded-lg outline-none border-none active:bg-blue-400" onClick={() => router.push('/Projects/Smart_Link')}>Explore Project</button>
+            </WipeLeftToRight>
+            <WipeRightToLeft className="grid grid-col-2 grid-rows-[repeat(2,fit-content(100%))] gap-y-2 gap-x-1 w-2/5">
+              <div className="col-span-2 w-full aspect-video">
+                <Image src="/Smart_Link/SmartLink_Project.png" alt="SmartLink Dashboard" width={0} height={0} sizes="100vw" style={{ width: '100%', height: 'auto', borderRadius: '10px' }} priority></Image>
+              </div>
+              <div className="col-span-1 w-full">
+                <Image src="/Smart_Link/Screenshot 2025-09-21 225153.png" alt="SmartLink Live Tracking" width={0} height={0} sizes="100vw" style={{ width: '100%', height: 'auto', borderRadius: '10px' }}></Image>
+              </div>
+              <div className="col-span-1 w-full">
+                <Image src="/Smart_Link/Screenshot 2025-09-21 225326.png" alt="SmartLink Search Results" width={0} height={0} sizes="100vw" style={{ width: '100%', height: 'auto', borderRadius: '10px' }}></Image>
+              </div>
+            </WipeRightToLeft>
+          </FadeInOut>
+        </AnimatedSectionWrapper>
+
         {/* KodeSkool */}
         <AnimatedSectionWrapper>
           <FadeInOut className="flex flex-row gap-6 rounded-lg shadow-lg w-full bg-slate-900 p-4">

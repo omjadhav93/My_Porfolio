@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        /* Simple scrollbar styling for webkit browsers */
+        .scrollbar-thin::-webkit-scrollbar {
+            width: 5px;
+            height: 5px;
+        }
+
+        .scrollbar-thin::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .scrollbar-thin::-webkit-scrollbar-thumb {
+            background-color: #374151;
+            /* gray-700 */
+            border-radius: 20px;
+            border: 3px solid transparent;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-950 text-gray-200 leading-relaxed font-['Montserrat']">
+    <div class="max-w-7xl mx-auto px-8 py-8">
+        <div class="text-center mb-12 relative">
+            <button
+                class="absolute top-0 left-0 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition duration-200 shadow-lg"
+                onclick="window.history.back();">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                    class="bi bi-arrow-left text-gray-300" viewBox="0 0 16 16">
+                    <path stroke="currentColor" stroke-width="1.5" fill-rule="evenodd"
+                        d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8" />
+                </svg>
+            </button>
+            <h1 class="text-4xl text-white mb-4 md:text-5xl font-bold">Smart Link 🚍</h1>
+            <p class="text-lg text-gray-400 max-w-3xl mx-auto">A smart public transport solution for real-time bus
+                tracking, route optimization, and enhanced commuter convenience. This project was developed for the
+                Smart India Hackathon (SIH) and qualified at the university level.</p>
+        </div>
+
+        <div class="bg-gradient-to-br from-gray-900 to-gray-800 p-8 rounded-xl shadow-lg mb-8 border border-gray-800">
+            <h2 class="text-2xl text-white mb-4 font-semibold">Project Overview</h2>
+            <p class="mb-6">As the <b class="text-yellow-400">Backend Engineer</b> for this project, I was responsible
+                for architecting and building the server-side infrastructure. This included developing a sophisticated
+                route-finding algorithm, creating APIs to power both the user-facing mobile app and the administrative
+                dashboard, and ensuring real-time data processing for live bus tracking. Our solution provides
+                passengers with accurate ETAs and route updates, while empowering administrators with a powerful fleet
+                management tool.</p>
+
+            <h3 class="text-xl text-white mb-4">Technology Stack</h3>
+            <div class="flex flex-wrap gap-6 mb-6">
+                <span
+                    class="bg-gray-800 text-white px-4 py-2 rounded-xl flex items-center gap-3 hover:transform hover:-translate-y-1 transition-transform duration-200 shadow-md">
+                    <img src="/Node.js.svg" alt="Node.js" class="w-6 h-6">
+                    Node.js
+                </span>
+                <span
+                    class="bg-gray-800 text-white px-4 py-2 rounded-xl flex items-center gap-3 hover:transform hover:-translate-y-1 transition-transform duration-200 shadow-md">
+                    <img src="/Express.svg" alt="Express.js" class="w-6 h-6">
+                    Express.js
+                </span>
+                <span
+                    class="bg-gray-800 text-white px-4 py-2 rounded-xl flex items-center gap-3 hover:transform hover:-translate-y-1 transition-transform duration-200 shadow-md">
+                    <img src="/MongoDB.svg" alt="MongoDB" class="w-6 h-6">
+                    MongoDB
+                </span>
+                <span
+                    class="bg-gray-800 text-white px-4 py-2 rounded-xl flex items-center gap-3 hover:transform hover:-translate-y-1 transition-transform duration-200 shadow-md">
+                    <img src="/Socket.io.svg" alt="Socket.IO" class="w-6 h-6">
+                    Socket.IO
+                </span>
+                <span
+                    class="bg-gray-800 text-white px-4 py-2 rounded-xl flex items-center gap-3 hover:transform hover:-translate-y-1 transition-transform duration-200 shadow-md">
+                    <img src="/React.svg" alt="React" class="w-6 h-6">
+                    React.js
+                </span>
+                <span
+                    class="bg-gray-800 text-white px-4 py-2 rounded-xl flex items-center gap-3 hover:transform hover:-translate-y-1 transition-transform duration-200 shadow-md">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="feather feather-git-branch">
+                        <line x1="6" y1="3" x2="6" y2="15"></line>
+                        <circle cx="18" cy="6" r="3"></circle>
+                        <circle cx="6" cy="18" r="3"></circle>
+                        <path d="M18 9a9 9 0 0 1-9 9"></path>
+                    </svg>
+                    Dijkstra's Algorithm
+                </span>
+            </div>
+        </div>
+
+        <div class="my-12">
+            <h2 class="text-3xl text-white mb-8 text-center font-semibold">Key Features</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div
+                    class="bg-gradient-to-br from-gray-900 to-gray-800 p-6 rounded-2xl shadow-lg hover:transform hover:-translate-y-2 transition-transform duration-300 border border-gray-800">
+                    <div class="h-52 bg-gray-700 rounded-xl mb-6 flex items-center justify-center overflow-hidden">
+                        <img src="/Smart_Link/file_2025-09-20_11.23.15.png" alt="Real-Time Bus Tracking"
+                            class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="text-xl text-white mb-3 font-semibold">Real-Time Bus Tracking</h3>
+                    <p class="text-gray-400 leading-relaxed">Passengers can track bus locations live on a map, providing
+                        accurate ETAs and reducing waiting times at stops.</p>
+                </div>
+                <div
+                    class="bg-gradient-to-br from-gray-900 to-gray-800 p-6 rounded-2xl shadow-lg hover:transform hover:-translate-y-2 transition-transform duration-300 border border-gray-800">
+                    <div class="h-52 bg-gray-700 rounded-xl mb-6 flex items-center justify-center overflow-hidden">
+                        <img src="/Smart_Link/Screenshot 2025-09-19 144051.png" alt="Advanced Route Search"
+                            class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="text-xl text-white mb-3 font-semibold">Advanced Route Search</h3>
+                    <p class="text-gray-400 leading-relaxed">A powerful search mechanism to find the most efficient
+                        routes, including transfers, between any two points in the city.</p>
+                </div>
+                <div
+                    class="bg-gradient-to-br from-gray-900 to-gray-800 p-6 rounded-2xl shadow-lg hover:transform hover:-translate-y-2 transition-transform duration-300 border border-gray-800">
+                    <div class="h-52 bg-gray-700 rounded-xl mb-6 flex items-center justify-center overflow-hidden">
+                        <img src="/Smart_Link/Screenshot 2025-09-21 225153.png" alt="Fleet Management Dashboard"
+                            class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="text-xl text-white mb-3 font-semibold">Fleet Management Dashboard</h3>
+                    <p class="text-gray-400 leading-relaxed">An admin dashboard providing a complete overview of fleet
+                        operations, including on-time performance and passenger load factors.</p>
+                </div>
+                <div
+                    class="bg-gradient-to-br from-gray-900 to-gray-800 p-6 rounded-2xl shadow-lg hover:transform hover:-translate-y-2 transition-transform duration-300 border border-gray-800">
+                    <div class="h-52 bg-gray-700 rounded-xl mb-6 flex items-center justify-center overflow-hidden">
+                        <img src="/Smart_Link/Screenshot 2025-09-21 225326.png" alt="Route & Station Management"
+                            class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="text-xl text-white mb-3 font-semibold">Route & Station Management</h3>
+                    <p class="text-gray-400 leading-relaxed">Admins can easily add, update, and manage bus routes and
+                        station details through a dedicated management interface.</p>
+                </div>
+                <div
+                    class="bg-gradient-to-br from-gray-900 to-gray-800 p-6 rounded-2xl shadow-lg hover:transform hover:-translate-y-2 transition-transform duration-300 border border-gray-800">
+                    <div class="h-52 bg-gray-700 rounded-xl mb-6 flex items-center justify-center overflow-hidden">
+                        <img src="/Smart_Link/file_2025-09-20_05.41.34.png" alt="Interactive Live Map"
+                            class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="text-xl text-white mb-3 font-semibold">Interactive Live Map</h3>
+                    <p class="text-gray-400 leading-relaxed">Users can view all nearby bus stops, explore routes
+                        visually, and get live updates directly on an interactive map interface.</p>
+                </div>
+                <div
+                    class="bg-gradient-to-br from-gray-900 to-gray-800 p-6 rounded-2xl shadow-lg hover:transform hover:-translate-y-2 transition-transform duration-300 border border-gray-800">
+                    <div class="h-52 bg-gray-700 rounded-xl mb-6 flex items-center justify-center overflow-hidden">
+                        <img src="/Smart_Link/file_2025-09-19_09.16.20.png" alt="Secure Authentication"
+                            class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="text-xl text-white mb-3 font-semibold">Secure Authentication</h3>
+                    <p class="text-gray-400 leading-relaxed">A secure and simple OTP-based login system for passengers,
+                        ensuring quick and safe access to the platform.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-gradient-to-br from-gray-900 to-gray-800 p-8 rounded-xl shadow-lg my-12 border border-gray-800">
+            <h2 class="text-2xl text-white mb-6 font-semibold">Backend Implementation Highlights</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-gray-800 p-6 rounded-lg hover:bg-gray-700 transition-all duration-300">
+                    <h3 class="text-teal-400 mb-3 font-semibold">Advanced Routing Algorithm</h3>
+                    <p class="text-gray-300">Implemented a custom route-searching mechanism using Dijkstra's Algorithm
+                        combined with a tree data structure to efficiently find the optimal path, including necessary
+                        bus transfers.</p>
+                </div>
+                <div class="bg-gray-800 p-6 rounded-lg hover:bg-gray-700 transition-all duration-300">
+                    <h3 class="text-teal-400 mb-3 font-semibold">Real-Time Data Processing</h3>
+                    <p class="text-gray-300">Utilized WebSockets (Socket.IO) to create a persistent, low-latency
+                        connection for broadcasting live GPS coordinates from buses to multiple clients simultaneously.
+                    </p>
+                </div>
+                <div class="bg-gray-800 p-6 rounded-lg hover:bg-gray-700 transition-all duration-300">
+                    <h3 class="text-teal-400 mb-3 font-semibold">RESTful APIs for Dashboard</h3>
+                    <p class="text-gray-300">Developed a comprehensive suite of RESTful APIs to feed aggregated data
+                        (ridership, on-time performance, fuel consumption) to the analytical admin dashboard.</p>
+                </div>
+                <div class="bg-gray-800 p-6 rounded-lg hover:bg-gray-700 transition-all duration-300">
+                    <h3 class="text-teal-400 mb-3 font-semibold">Database Architecture</h3>
+                    <p class="text-gray-300">Designed and implemented MongoDB schemas for storing complex,
+                        interconnected data including routes, stations, bus schedules, and live tracking history
+                        efficiently.</p>
+                </div>
+                <div class="bg-gray-800 p-6 rounded-lg hover:bg-gray-700 transition-all duration-300">
+                    <h3 class="text-teal-400 mb-3 font-semibold">Geolocation Services</h3>
+                    <p class="text-gray-300">Built backend logic to process raw GPS data, calculate ETAs based on
+                        real-time traffic and distance, and perform geospatial queries to find nearby stations.</p>
+                </div>
+                <div class="bg-gray-800 p-6 rounded-lg hover:bg-gray-700 transition-all duration-300">
+                    <h3 class="text-teal-400 mb-3 font-semibold">Scalable Server Architecture</h3>
+                    <p class="text-gray-300">Configured a Node.js server with an event-driven, non-blocking
+                        architecture, ensuring high performance and scalability to handle thousands of concurrent users.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="my-12">
+            <h2 class="text-3xl text-white mb-8 text-center font-semibold">UI & Dashboard Showcase</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                <div
+                    class="bg-gradient-to-br from-gray-900 to-gray-800 p-8 rounded-xl shadow-lg border border-gray-800 hover:transform hover:-translate-y-2 transition-transform duration-300">
+                    <h3 class="text-2xl text-white mb-6 font-semibold">Comprehensive Admin Dashboard</h3>
+                    <div class="bg-gray-800 rounded-xl p-4 mb-6 overflow-hidden">
+                        <img src="/Smart_Link/Screenshot 2025-09-21 225153.png" alt="Admin Dashboard"
+                            class="w-full h-auto rounded-lg">
+                    </div>
+                    <p class="text-gray-400 leading-relaxed">The admin interface provides a powerful, data-rich
+                        dashboard for monitoring all fleet operations and making informed, data-driven decisions.</p>
+                </div>
+
+                <div
+                    class="bg-gradient-to-br from-gray-900 to-gray-800 p-8 rounded-xl shadow-lg border border-gray-800 hover:transform hover:-translate-y-2 transition-transform duration-300">
+                    <h3 class="text-2xl text-white mb-6 font-semibold">Intuitive Mobile Interface</h3>
+                    <div class="flex justify-center gap-4">
+                        <div class="w-40 aspect-[9/16] overflow-hidden rounded-xl border-2 border-gray-700">
+                            <img src="/Smart_Link/Screenshot 2025-09-19 132044.png" alt="Mobile Search"
+                                class="w-full object-cover">
+                        </div>
+                        <div class="w-40 aspect-[9/16] overflow-hidden rounded-xl border-2 border-gray-700">
+                            <img src="/Smart_Link/Screenshot 2025-09-19 144051.png" alt="Mobile Results"
+                                class="w-full object-cover">
+                        </div>
+                        <div class="w-40 aspect-[9/16] overflow-hidden rounded-xl border-2 border-gray-700">
+                            <img src="/Smart_Link/file_2025-09-20_11.23.15.png" alt="Mobile Tracking"
+                                class="w-full object-cover">
+                        </div>
+                    </div>
+                    <p class="text-gray-400 leading-relaxed mt-6">The platform is designed with a mobile-first approach,
+                        ensuring a clean, responsive, and seamless experience for passengers on the go.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-gradient-to-br from-gray-900 to-gray-800 p-8 rounded-xl shadow-lg my-12 border border-gray-800">
+            <h2 class="text-2xl text-white mb-6 font-semibold">Future Plans</h2>
+            <ul class="list-disc list-inside text-gray-300 space-y-3">
+                <li><b class="text-teal-400">Digital Ticketing Integration:</b> Implementing a secure, in-app payment
+                    and QR code-based ticketing system to create a fully cashless experience.</li>
+                <li><b class="text-teal-400">AI-Powered Demand Prediction:</b> Leveraging machine learning to analyze
+                    ridership data and predict high-demand routes and times, enabling dynamic scheduling and resource
+                    allocation.</li>
+                <li><b class="text-teal-400">Scalable Multi-City Deployment:</b> Architecting the backend to support a
+                    multi-tenant system, allowing for easy and scalable deployment of the platform across multiple
+                    cities.</li>
+            </ul>
+        </div>
+    </div>
+</body>
+
+</html>

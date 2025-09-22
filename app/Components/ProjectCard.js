@@ -6,6 +6,12 @@ import AnimatedSectionWrapper from "./AnimationWrapper";
 const ProjectGrid = (props) => {
     const projects = [
         {
+            title: "Smart Link - Real-Time Bus Tracking System",
+            description: "A smart public transport solution that allows passengers to track buses in real-time, developed for the Smart India Hackathon.",
+            image: "/Smart_Link/SmartLink_Project.png", // Using the showcase image you provided
+            projectId: "Smart_Link"
+        },
+        {
             title: "KodeSkool - Coding School Platform",
             description: "Kode Skool is an innovative startup empowering school students with tech skills through hands-on coding lessons and real-world projects.",
             image: "/KodeSkool/KodeSkool_Dashboard.png",
@@ -69,4 +75,4 @@ const ProjectGrid = (props) => {
     );
 };
 
-export default ProjectGrid; 
+export default ProjectGrid;
